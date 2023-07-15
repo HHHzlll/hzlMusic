@@ -21,22 +21,17 @@ import { createQrKey, createQr, checkQr, getLoginStatus, logout } from "@/api/us
 import { userStore } from "@/store/user.ts";
 const user = userStore()    // 用户的pinia状态
 
-// 如果 pinia 中用户信息不存在，重新获取
-if (Object.keys(user.userInfo).length <= 0) {
-    getLoginStatus().then(res => {
-        user.userInfo = Object.assign(res.data.data.account, res.data.data.profile)
-    })
-}
-// 如果 pinia 中token不存在，退出登录
-if (user.token.length <= 0) {
-    logout()
-}
-
 // 登录功能
 const qrimg: Ref<string> = ref('')
 const open: Ref<boolean> = ref(false)
 let uniKey: string
 const loginStatus: Ref<string> = ref('')
+
+onMounted(() => {
+    getLoginStatus().then(res => {
+        user.userInfo = Object.assign(res.data.data.account, res.data.data.profile)
+    })
+})
 
 // 1、用户点击登录
 function handleLogin() {
@@ -56,18 +51,14 @@ function handleLogin() {
                     if (res.data.code === 803) {
                         // 7、将token和用户信息存入pinia
                         user.token = res.data.cookie
-                        getLoginStatus().then(res => {
-                            user.userInfo = Object.assign(res.data.data.account, res.data.data.profile)
-                            open.value = false
-                            clearInterval(timer)
-                            ElMessage({
-                                message: '登陆成功，将在两秒后刷新页面！',
-                                type: 'success'
-                            })
-                            setTimeout(() => {
-                                location.reload()
-                            }, 2000);
+                        ElMessage({
+                            message: '登陆成功，将在两秒后刷新页面！',
+                            type: 'success'
                         })
+                        clearInterval(timer)
+                        setTimeout(() => {
+                            location.reload()
+                        }, 2000);
                     }
                     if (open.value === false) clearInterval(timer)
                 })

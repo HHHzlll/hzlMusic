@@ -27,12 +27,6 @@ const open: Ref<boolean> = ref(false)
 let uniKey: string
 const loginStatus: Ref<string> = ref('')
 
-onMounted(() => {
-    getLoginStatus().then(res => {
-        user.userInfo = Object.assign(res.data.data.account, res.data.data.profile)
-    })
-})
-
 // 1、用户点击登录
 function handleLogin() {
     // 2、打开对话框
@@ -51,14 +45,15 @@ function handleLogin() {
                     if (res.data.code === 803) {
                         // 7、将token和用户信息存入pinia
                         user.token = res.data.cookie
+                        getLoginStatus(user.token).then(res => {
+                            user.userInfo = Object.assign(res.data.data.account, res.data.data.profile)
+                            console.log(user.userInfo, res.data);
+                        })
                         ElMessage({
-                            message: '登陆成功，将在两秒后刷新页面！',
+                            message: '登陆成功！',
                             type: 'success'
                         })
                         clearInterval(timer)
-                        setTimeout(() => {
-                            location.reload()
-                        }, 2000);
                     }
                     if (open.value === false) clearInterval(timer)
                 })

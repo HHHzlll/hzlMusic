@@ -35,16 +35,18 @@ export function checkQr(key: string) {
 // 退出登录
 export function logout() {
     return request({
-        url: '/logout',
+        url: '/logout?timestamp=' + new Date().getTime(),
         method: 'get'
     })
 }
 
 // 获取登陆状态
-export function getLoginStatus() {
+export function getLoginStatus(cookie: string) {
+    const data = { cookie }
     return request({
-        url: '/login/status',
-        method: 'get'
+        url: '/login/status?timestamp=' + new Date().getTime(),
+        method: 'post',
+        data
     })
 }
 

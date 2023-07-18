@@ -23,11 +23,16 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
       open: true, // 运行后自动打开浏览器
       // 反向代理解决跨域
       proxy: {
-        [env.VITE_APP_BASE_API]: {
-          target: 'http://127.0.0.1:3000',
+        'http://localhost:666': {
+          target: env.VITE_APP_BASE_API,
           changeOrigin: true,
           rewrite: path => path.replace(new RegExp('^' + env.VITE_APP_BASE_API), '')
-        }
+        },
+        'http://127.0.0.1:666': {
+          target: env.VITE_APP_BASE_API,
+          changeOrigin: true,
+          rewrite: path => path.replace(new RegExp('^' + env.VITE_APP_BASE_API), '')
+        },
       }
     },
     // src 路径别名配置

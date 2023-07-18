@@ -10,3 +10,13 @@ export function getPlaylistDetail(id: number) {
         playlistStore.changePlaylistDetail(res.data)
     })
 }
+
+// 播放单首歌曲，参数是歌曲的详细信息
+import { useMusicStore } from "@/store/music";
+const music = useMusicStore()
+export function playMusic(list: any) {
+    if (Object.prototype.toString.call(list).slice(8, -1) !== 'Array') list = [list]
+    console.log(list);
+    
+    music.changeWaitingPlaylist(list)
+}

@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import Music from "@/components/Music/music.vue";
+import Music from "./Music/music.vue";
 import Login from "./Login.vue";
 import UserInfo from "./UserInfo.vue";
 

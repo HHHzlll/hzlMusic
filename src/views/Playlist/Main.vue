@@ -42,28 +42,8 @@ getMusicList(playlist.id).then(res => {
 
 
 // ================================================逻辑部分================================================
-const { playlistAll }: any = usePlaylistStore().playlistAll
-const props = defineProps(['playMusicAll'])
-watch(() => props.playMusicAll, () => {
-    console.log(musicList);
-    console.log(playlistAll);
-    console.log('监听');
-})
-
-
 // 播放歌曲
-import { useMusicStore } from "@/store/music";
-import { getMusicUrl } from "@/api/music";
-const music: any = useMusicStore().music
-const musicDetail: any = useMusicStore().musicDetail
-function playMusic(row: any) {
-    getMusicUrl(row.id, 'standard').then(res => {
-        // 将返回的url替换为 https:// 安全协议
-        res.data.data[0].url = res.data.data[0].url.replace('http://', 'https://')
-        music.value = res.data.data[0]  // 接口返回的音乐url
-        musicDetail.value = row         // 用户点击的歌曲详情
-    })
-}
+import { playMusic } from "@/utils/playlist";
 </script>
 
 <style scoped>

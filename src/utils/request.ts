@@ -1,5 +1,6 @@
 //  src/utils/request.ts
 import axios from 'axios';
+import { userStore } from "@/store/user";
 
 // 创建 axios 实例
 const service = axios.create({
@@ -10,7 +11,8 @@ const service = axios.create({
 // 请求拦截器
 service.interceptors.request.use(
   config => {
-    // console.log(config);
+    console.log(config);
+    config.params['cookie'] = userStore().token
     return config
   }
 );

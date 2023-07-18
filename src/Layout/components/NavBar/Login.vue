@@ -11,6 +11,7 @@
         <el-drawer v-model="open" width="500px">
             <h2>请使用网易云音乐App 扫码登录</h2>
             <p>{{ loginStatus }}</p>
+            <el-divider />
             <el-image class="qrimg" v-if="qrimg !== ''" :src="qrimg" />
         </el-drawer>
     </div>
@@ -54,6 +55,10 @@ function handleLogin() {
                         })
                         open.value = false
                         clearInterval(timer)
+                    }
+                    if(res.data.code === 800){
+                        clearInterval(timer)
+                        handleLogin()
                     }
                     if (open.value === false) clearInterval(timer)
                 })

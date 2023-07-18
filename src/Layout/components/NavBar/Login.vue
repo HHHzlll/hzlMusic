@@ -18,15 +18,16 @@
 
 <script setup lang="ts">
 import { createQrKey, createQr, checkQr, getLoginStatus, logout } from "@/api/user/index.ts";
+
 import { userStore } from "@/store/user.ts";
 const user = userStore()    // 用户的pinia状态
+
 
 // 登录功能
 const qrimg: Ref<string> = ref('')
 const open: Ref<boolean> = ref(false)
 let uniKey: string
 const loginStatus: Ref<string> = ref('')
-
 // 1、用户点击登录
 function handleLogin() {
     // 2、打开对话框
@@ -43,16 +44,15 @@ function handleLogin() {
                     loginStatus.value = res.data.message
                     // 6、用户登陆成功
                     if (res.data.code === 803) {
-                        // 7、将token和用户信息存入pinia
-                        user.token = res.data.cookie
-                        getLoginStatus(user.token).then(res => {
-                            user.userInfo = Object.assign(res.data.data.account, res.data.data.profile)
-                            console.log(user.userInfo, res.data);
-                        })
+                        // 7、将token存入pinia
+                        user.changeToken(res.data.cookie)
+                        // 8、将用户信息存入pinia
+                        getLoginStatus(user.token).then(res => user.changeUserInfo(res.data.data))
                         ElMessage({
                             message: '登陆成功！',
                             type: 'success'
                         })
+                        open.value = false
                         clearInterval(timer)
                     }
                     if (open.value === false) clearInterval(timer)
@@ -66,15 +66,13 @@ function handleLogin() {
 function handleLogout() {
     logout().then(() => {
         // 清空pinia中的token和用户信息
-        user.token = ''
-        user.userInfo = {}
+        user.changeToken('')
+        user.changeUserInfo({})
         ElMessage({
-            message: '注销成功，将在两秒后刷新页面！',
+            message: '注销成功！',
             type: 'success'
         })
-        setTimeout(() => {
-            location.reload()
-        }, 2000);
+        // location.reload()
     })
 }
 

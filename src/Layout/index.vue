@@ -4,6 +4,7 @@ import AppMain from "./components/AppMain.vue"
 import NavBar from './components/NavBar/NavBar.vue'
 import SideBar from './components/SideBar.vue'
 
+// 监听 pinia 歌单信息的变化，跳转路由
 import { usePlaylistStore } from "@/store/playlist";
 const router = useRouter()
 watch(() => usePlaylistStore().playlistDetail, () => {
@@ -11,7 +12,7 @@ watch(() => usePlaylistStore().playlistDetail, () => {
     setTimeout(() => {  // 延迟执行
         router.push({ name: 'playlist' })
     });
-}, { deep: true })
+})
 </script>
 
 <template>

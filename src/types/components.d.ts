@@ -7,6 +7,8 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    Awaiplaylist: typeof import('./../components/Music/awaiplaylist.vue')['default']
+    AwaitPlaylist: typeof import('./../components/Music/awaitPlaylist.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElBadge: typeof import('element-plus/es')['ElBadge']
@@ -43,7 +45,8 @@ declare module 'vue' {
     IEpWarnTriangleFilled: typeof import('~icons/ep/warn-triangle-filled')['default']
     Main: typeof import('./../components/Playlist/Main.vue')['default']
     Music: typeof import('./../components/Music/music.vue')['default']
-    Playlist: typeof import('./../components/Playlist/Playlist.vue')['default']
+    MusicInfo: typeof import('./../components/Music/musicInfo.vue')['default']
+    Playlist: typeof import('./../components/Music/playlist.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SvgIcon: typeof import('./../components/SvgIcon/index.vue')['default']

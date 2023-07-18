@@ -12,7 +12,7 @@
                 {{ route.meta.title }}
             </el-menu-item>
 
-            <el-sub-menu index="user" v-if="token">
+            <el-sub-menu index="user" v-if="userLogin()">
                 <template #title>
                     <el-text>用户创建的歌单</el-text>
                 </template>
@@ -42,12 +42,15 @@ import { getUserPlaylist } from "@/api/playlist";
 import { userStore } from "@/store/user";
 import { getPlaylistDetail } from '@/utils/playlist';
 
-const { userInfo, token }: any = userStore()
+const user: any = userStore()
 const userPlaylist: any = ref([])
-if (userInfo?.id !== undefined) {
-    getUserPlaylist(userInfo.id).then(res => {
-        userPlaylist.value = res.data.playlist
-    })
+function userLogin() {
+    if (user.userInfo.profile) {
+        getUserPlaylist(user.userInfo.profile.userId).then(res => {
+            userPlaylist.value = res.data.playlist
+        })
+    }
+    return user.userInfo.profile
 }
 </script>
 

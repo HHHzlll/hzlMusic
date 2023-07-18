@@ -4,7 +4,15 @@ export const userStore = defineStore('userStore', () => {
     const token: Ref<string> = ref('')
     const userInfo: Ref<object> = ref({})
 
-    return { token, userInfo }
+    function changeToken(str: string) {
+        token.value = str
+    }
+
+    function changeUserInfo(obj: object){
+        userInfo.value = obj
+    }
+
+    return { token, userInfo, changeToken, changeUserInfo }
 }, {
     persist: {
         storage: window.localStorage

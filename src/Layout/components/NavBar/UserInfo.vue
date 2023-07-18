@@ -1,27 +1,36 @@
 <template>
-    <div class="userInfo">
-        <el-avatar :src="userInfo.avatarUrl + '?param=50y50'" class="avatar" />
-        <!-- <el-image src="https://p1.music.126.net/jS92kW49E37VDr8f6A1ZKg==/109951167550777780.jpg?param=200y200" class="avatar" /> -->
-        <el-text truncated>{{ userInfo.nickname }}</el-text>
+    <div class="userInfo" v-if="user.userInfo.profile">
+        <el-avatar :size="40" :src="user.userInfo.profile.avatarUrl + '?param=40y40'" class="avatar" />
+        <el-text truncated>{{ user.userInfo.profile.nickname }}</el-text>
+    </div>
+    <div class="userInfo" v-else>
+        <el-avatar :size="40" class="avatar" />
+        <el-text truncated>游客</el-text>
     </div>
 </template>
 
 <script setup lang="ts">
 import { userStore } from "@/store/user";
 
-const userInfo: any = toRefs(userStore().userInfo)
+const user: any = userStore()
 </script>
 
 <style scoped>
-.userInfo{
+.userInfo {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
 }
+
 .avatar {
-    width: 50px;
-    height: 40px;
+    position: absolute;
+    left: 0;
     border-radius: 50%;
     margin: 0 .5rem;
+}
+
+.el-text {
+    padding-left: 50px;
 }
 </style>

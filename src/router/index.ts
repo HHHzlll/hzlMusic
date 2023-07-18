@@ -2,6 +2,14 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 
 export const Layout = () => import('@/Layout/index.vue')
+// 当用户在非法情况进入 playlist 时，重定向到主页
+import { usePlaylistStore } from "@/store/playlist";
+function playlistRedirect() {
+    const playlistDetail = usePlaylistStore().playlistDetail
+    if (Object.keys(playlistDetail).length <= 0) {
+        return { path: '/' }
+    }
+}
 
 // 静态路由
 export const constantRoutes: RouteRecordRaw[] = [
@@ -35,6 +43,7 @@ export const constantRoutes: RouteRecordRaw[] = [
                 path: 'detail',
                 name: 'detail',
                 component: () => import('@/views/Playlist/Playlist.vue'),
+                beforeEnter: [playlistRedirect]
             }
         ]
     }

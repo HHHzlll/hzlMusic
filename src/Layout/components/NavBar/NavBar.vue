@@ -18,7 +18,7 @@ import UserInfo from "./UserInfo.vue";
     width: 100%;
     height: 100%;
     display: grid;
-    grid-template-columns: 1fr 200px 60px;
+    grid-template-columns: 1fr 150px 60px;
     border-radius: 0 0 4px 4px;
 }
 </style>

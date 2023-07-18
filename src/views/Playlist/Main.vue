@@ -4,7 +4,7 @@
         <el-table-column label="标题" min-width="400px">
             <template #default="scope">
                 <div class="musicTitle">
-                    <el-image :src="scope.row.al.picUrl + '?param=50y50'" />
+                    <el-image lazy :src="scope.row.al.picUrl + '?param=50y50'" />
                     <div>
                         <el-text size="large">{{ scope.row.name }}</el-text>
                         <br>
@@ -27,6 +27,7 @@
 <script setup lang="ts">
 import { usePlaylistStore } from '@/store/playlist';
 import { formatMilliseconds } from "@/utils/function";
+// ================================================渲染部分================================================
 // 解构赋值 歌单信息
 const { playlist }: any = usePlaylistStore().playlistDetail
 
@@ -38,6 +39,17 @@ getMusicList(playlist.id).then(res => {
     musicList.value = res.data.songs
     loading.value = false
 })
+
+
+// ================================================逻辑部分================================================
+const { playlistAll }: any = usePlaylistStore().playlistAll
+const props = defineProps(['playMusicAll'])
+watch(() => props.playMusicAll, () => {
+    console.log(musicList);
+    console.log(playlistAll);
+    console.log('监听');
+})
+
 
 // 播放歌曲
 import { useMusicStore } from "@/store/music";

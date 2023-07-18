@@ -9,7 +9,9 @@
             <el-text style="margin: 0 .5rem;">{{ user.nickname }}</el-text>
             <el-text type="info">{{ playlist.createTime }}创建</el-text>
             <div class="button">
-                <el-button type="danger" size="large"><svg-icon icon-class="playMusic" />&nbsp;播放全部</el-button>
+                <el-button type="danger" size="large" @click="emit('playMusic')">
+                    <svg-icon icon-class="playMusic" />&nbsp;播放全部
+                </el-button>
             </div>
         </div>
     </el-card>
@@ -30,6 +32,12 @@ playlist.createTime = formatTimestamp(playlist.createTime, 'YYYY-MM-DD')
 getUserDetail(playlist.userId).then(res => {
     user.value = res.data.profile
 })
+
+// 播放当前歌单下的全部歌曲
+const emit: any = defineEmits(['playMusic'])
+// function playMusicAll() {
+//     emit('playMusic')
+// }
 </script>
 
 <style scoped>

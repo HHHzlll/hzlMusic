@@ -95,9 +95,11 @@ function playMusic() {
 }
 
 function prevMusic() {
+    if (useMusicStore().waitingPlaylist.length === 1) { return }
     useMusicStore().changeIndex(useMusicStore().index - 1)
 }
 function nextMusic() {
+    if (useMusicStore().waitingPlaylist.length === 1) { return }
     useMusicStore().changeIndex(useMusicStore().index + 1)
 }
 </script>

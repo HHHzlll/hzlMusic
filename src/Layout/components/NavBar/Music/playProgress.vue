@@ -25,8 +25,12 @@ function setTime() {
     // 总时间
     length.value = Number(prop.audio.duration.toFixed(0))
 
-    if(progress.value === length.value && useMusicStore().waitingPlaylist.length > 1){
+    // 播完自动下一首
+    if (progress.value === length.value && useMusicStore().waitingPlaylist.length > 1) {
         useMusicStore().changeIndex(useMusicStore().index + 1)
+        // 如果播完且仅有一首歌，则重新播放
+    } else if (progress.value === length.value && useMusicStore().waitingPlaylist.length === 1) {
+        prop.audio.currentTime = 0
     }
 }
 // 改变播放进度

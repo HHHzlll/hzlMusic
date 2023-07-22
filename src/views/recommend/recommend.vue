@@ -23,7 +23,7 @@ import { getPlaylistDetail } from "@/utils/playlist";
 
 // 歌单渲染
 const loading: Ref<boolean> = ref(true)
-const limit: number = 10
+const limit: number = 30
 const playList: Ref<Array<any>> = ref([{}])
 getRecommendList(limit).then(res => {
     playList.value = res.data.result

@@ -7,13 +7,13 @@
 </template>
 
 <script setup lang="ts">
-const volume = ref()
+const volume = ref(100)
 const prop = defineProps(['audio'])
 
 nextTick(() => {
     watch(volume, () => {
         prop.audio.volume = volume.value / 100
-    })
+    }, { immediate: true })
 })
 </script>
 
@@ -21,12 +21,14 @@ nextTick(() => {
 .volume {
     display: flex;
     align-items: center;
-    width: 200px;
+    width: 150px;
 }
+
 .icon {
     font-size: 2rem;
     color: var(--primary-color);
 }
+
 .el-slider {
     padding: 0 1rem;
     --el-slider-main-bg-color: var(--primary-color);

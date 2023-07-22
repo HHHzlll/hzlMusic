@@ -11,7 +11,8 @@ const service = axios.create({
 // 请求拦截器
 service.interceptors.request.use(
   config => {
-    config.params['cookie'] = userStore().token
+    if(config.params === undefined) config.params = {}
+    config.params.cookie = userStore().token
     return config
   }
 );

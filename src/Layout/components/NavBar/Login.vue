@@ -58,7 +58,6 @@ function handleLogin() {
                     }
                     if(res.data.code === 800){
                         clearInterval(timer)
-                        handleLogin()
                     }
                     if (open.value === false) clearInterval(timer)
                 })

@@ -2,11 +2,11 @@
     <div class="waitingPlaylist">
         <svg-icon class="icon" icon-class="waitingPlaylist" @click="openWaitingPlaylist = !openWaitingPlaylist" />
         <Transition name="fade">
-            <el-table class="list" :data="musicStore.waitingPlaylist" v-if="openWaitingPlaylist" @row-dblclick="playMusic" max-height="70vh">
+            <el-table class="list" :data="musicStore.waitingPlaylist" v-show="openWaitingPlaylist" @row-dblclick="playMusic" max-height="70vh">
                 <el-table-column min-width="400px">
                     <template #default="scope">
                         <div class="musicTitle">
-                            <el-image lazy :src="scope.row.al.picUrl + '?param=50y50'" />
+                            <el-image :src="scope.row.al.picUrl + '?param=50y50'" />
                             <div>
                                 <el-text size="large">{{ scope.row.name }}</el-text>
                                 <br>
@@ -71,7 +71,7 @@ const openWaitingPlaylist = ref(false)
 .fade-enter-from,
 .fade-leave-to {
     opacity: 0;
-    transform:translateY(-50vh);
+    transform:scale(0);
 }
 
 .fade-enter-active,

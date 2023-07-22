@@ -16,14 +16,14 @@
 
             <!-- 按钮控件 -->
             <div class="buttonList">
-                <el-button type="danger" circle text><svg-icon icon-class="prevMusic" /></el-button>
+                <el-button @click="prevMusic()" type="danger" circle text><svg-icon icon-class="prevMusic" /></el-button>
                 <el-button type="danger" circle text @click="playMusic">
                     <Transition name="fade" mode="out-in">
                         <svg-icon v-if="!isPaused" icon-class="playMusic" />
                         <svg-icon v-else icon-class="stopMusic" />
                     </Transition>
                 </el-button>
-                <el-button type="danger" circle text><svg-icon icon-class="nextMusic" /></el-button>
+                <el-button @click="nextMusic()" type="danger" circle text><svg-icon icon-class="nextMusic" /></el-button>
 
                 <playProgress :audio="audio" :isPaused="isPaused" />
             </div>
@@ -53,6 +53,10 @@ const musicUrl = ref({ url: '' })
 watch(() => useMusicStore().musicDetail, () => {
     playMusic()
 }, { deep: true })
+// 监听播放列表，改变时将播放歌曲设为第一首
+watch(() => useMusicStore().waitingPlaylist, () => {
+    useMusicStore().changeIndex(0)
+})
 
 // 播放音乐
 function playMusic() {
@@ -88,6 +92,13 @@ function playMusic() {
         })
 
     })
+}
+
+function prevMusic() {
+    useMusicStore().changeIndex(useMusicStore().index - 1)
+}
+function nextMusic() {
+    useMusicStore().changeIndex(useMusicStore().index + 1)
 }
 </script>
 

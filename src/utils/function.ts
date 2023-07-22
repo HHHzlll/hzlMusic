@@ -41,13 +41,9 @@ export function formatMilliseconds(milliseconds: number) {
         const formattedMinutes = String(minutes).padStart(2, '0');
         const formattedSeconds = String(remainingSeconds).padStart(2, '0');
         return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
-    } else if (minutes > 0) {
+    } else {
         const formattedMinutes = String(minutes).padStart(2, '0');
         const formattedSeconds = String(remainingSeconds).padStart(2, '0');
         return `${formattedMinutes}:${formattedSeconds}`;
-    } else {
-        const formattedSeconds = String(remainingSeconds).padStart(2, '0');
-        return `${formattedSeconds}`;
     }
 }
-

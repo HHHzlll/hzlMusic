@@ -15,8 +15,7 @@ export function getPlaylistDetail(id: number) {
 import { useMusicStore } from "@/store/music";
 const music = useMusicStore()
 export function playMusic(list: any) {
+    // 如果是非数组类型，将他放到一个新的数组中
     if (Object.prototype.toString.call(list).slice(8, -1) !== 'Array') list = [list]
-    console.log(list);
-    
     music.changeWaitingPlaylist(list)
 }

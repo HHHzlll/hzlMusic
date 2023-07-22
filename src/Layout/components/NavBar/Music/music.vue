@@ -24,6 +24,8 @@
                     </Transition>
                 </el-button>
                 <el-button type="danger" circle text><svg-icon icon-class="nextMusic" /></el-button>
+
+                <playProgress :audio="audio" :isPaused="isPaused" />
             </div>
         </div>
 
@@ -37,6 +39,7 @@
 </template>
 
 <script setup lang="ts">
+import playProgress from "./playProgress.vue";
 import volume from "./volume.vue";
 import waitingList from "./waitingList.vue";
 import { useMusicStore } from "@/store/music";
@@ -107,6 +110,10 @@ function playMusic() {
 .nav-right {
     display: flex;
     align-items: center;
+}
+
+.buttonList {
+    position: relative;
 }
 
 .musicInfo .el-text {

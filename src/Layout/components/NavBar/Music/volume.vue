@@ -1,13 +1,13 @@
 <template>
     <div class="volume">
-        <svg-icon v-if="!(volume > 0)" class="icon" icon-class="volume-open"></svg-icon>
-        <svg-icon v-else class="icon" icon-class="volume-close"></svg-icon>
+        <svg-icon v-if="!(volume > 0)" @click="volume = 100" class="icon" icon-class="volume-open"></svg-icon>
+        <svg-icon v-else @click="volume = 0" class="icon" icon-class="volume-close"></svg-icon>
         <el-slider v-model="volume" />
     </div>
 </template>
 
 <script setup lang="ts">
-const volume = ref(100)
+const volume = ref(50)
 const prop = defineProps(['audio'])
 
 nextTick(() => {
@@ -27,6 +27,7 @@ nextTick(() => {
 .icon {
     font-size: 2rem;
     color: var(--primary-color);
+    cursor: pointer;
 }
 
 .el-slider {

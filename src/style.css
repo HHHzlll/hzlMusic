@@ -21,6 +21,9 @@
   /* 禁止用户拖拽元素 */
   -webkit-user-drag: none;
 }
+*::-webkit-scrollbar{
+  display: none;
+}
 a {
   font-weight: 500;
   color: #646cff;

@@ -54,7 +54,7 @@ function changeProgress(e: number) {
     --el-slider-main-bg-color: var(--primary-color);
 }
 
-.el-slider /deep/ .el-slider__button-wrapper {
+.el-slider :deep(.el-slider__button-wrapper) {
     display: none;
 }
 </style>

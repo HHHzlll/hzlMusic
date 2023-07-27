@@ -16,7 +16,10 @@ export const useMusicStore = defineStore('music', () => {
         waitingPlaylist.value = arr
     }
 
-    function changeIndex(i: number) {
+    function changeIndex(i: number, enforce?: boolean) {
+        // 忽略越界判断，强制执行
+        console.log(i);
+        if (enforce) return index.value = i
         if (i < 0) {
             index.value = 0
         } else if (i > waitingPlaylist.length) {

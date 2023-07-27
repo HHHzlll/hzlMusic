@@ -14,10 +14,20 @@ export function getPlaylistDetail(id: number) {
 // 将歌曲添加到待播列表，参数是歌曲的详细信息
 import { useMusicStore } from "@/store/music";
 const musicStore = useMusicStore()
-export function addWaitingPlaylist(list: any) {
+export async function addWaitingPlaylist(list: any, row?: any) {
     // 如果是非数组类型，将他放到一个新的数组中
     if (Object.prototype.toString.call(list).slice(8, -1) !== 'Array') list = [list]
-    musicStore.changeWaitingPlaylist(list)
+    // 如果有row，也就是用户指定了单曲
+    if (row) {
+        list.map((item: any, index: number) => {
+            if (item.id === row.id) {
+                return musicStore.changeIndex(index)
+            }
+        })
+    } else {    // 没有row则播放第一首
+        musicStore.changeIndex(0)
+    }
+    await musicStore.changeWaitingPlaylist(list)
 }
 
 // 播放音乐
@@ -33,7 +43,7 @@ function playMusicFunc(audio: any) {
         // 将返回的url替换为 https:// 安全协议
         res.data.data[0].url = res.data.data[0].url.replace('http://', 'https://')
         // 如果audio的url和接口返回的url不同 重新赋值
-        if(audio.value.src !== res.data.data[0].url) audio.value.src = res.data.data[0].url
+        if (audio.value.src !== res.data.data[0].url) audio.value.src = res.data.data[0].url
         if (audio.value.src.length > 0) {
             isPaused.value = audio.value.paused
             // 循环查看音频的网络状态

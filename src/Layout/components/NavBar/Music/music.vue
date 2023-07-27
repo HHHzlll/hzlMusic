@@ -55,10 +55,6 @@ import { isPaused } from "@/utils/playlist";
 watch(() => useMusicStore().musicDetail, () => {
     playMusic(audio)
 }, { deep: true })
-// 监听播放列表，改变时将播放歌曲设为第一首
-watch(() => useMusicStore().waitingPlaylist, () => {
-    useMusicStore().changeIndex(0)
-})
 
 function handlePlayMusic() {
     playMusic(audio)

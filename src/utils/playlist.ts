@@ -32,7 +32,7 @@ export async function addWaitingPlaylist(list: any, row?: any) {
 
 // 播放音乐
 import { getMusicUrl } from "@/api/music";
-function playMusicFunc(audio: any) {
+export function playMusic(audio: any) {
     if (musicStore.musicDetail?.id === undefined) {
         return ElNotification({
             type: 'error',
@@ -64,7 +64,7 @@ function playMusicFunc(audio: any) {
     })
 }
 export const isPaused = ref(false)
-export const playMusic = debounce(playMusicFunc, 1000)
+// export const playMusic = debounce(playMusicFunc, 0)
 
 // 上一首下一首
 import { debounce } from "./function";

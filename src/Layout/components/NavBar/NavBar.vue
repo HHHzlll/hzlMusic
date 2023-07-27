@@ -20,5 +20,6 @@ import UserInfo from "./UserInfo.vue";
     display: grid;
     grid-template-columns: 1fr 150px 60px;
     border-radius: 0 0 4px 4px;
+    position: relative;
 }
 </style>

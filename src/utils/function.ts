@@ -50,18 +50,18 @@ export function formatMilliseconds(milliseconds: number) {
 
 // 防抖函数
 export function debounce(func: Function, delay: number) {
-    let timer: ReturnType<typeof setTimeout>;
-    let immediateExecuted = false;
+    let timer: ReturnType<typeof setTimeout> | null;
 
     return function (...args: any[]) {
-        if (!immediateExecuted) {
-            func.apply(this, args);
-            immediateExecuted = true;
-        }
+        const immediate = !timer;
+        clearTimeout(timer as ReturnType<typeof setTimeout>);
 
-        clearTimeout(timer);
         timer = setTimeout(() => {
-            immediateExecuted = false;
+            timer = null;
         }, delay);
+
+        if (immediate) {
+            func.apply(null, args);
+        }
     };
 }

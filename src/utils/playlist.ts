@@ -11,11 +11,60 @@ export function getPlaylistDetail(id: number) {
     })
 }
 
-// 播放单首歌曲，参数是歌曲的详细信息
+// 将歌曲添加到待播列表，参数是歌曲的详细信息
 import { useMusicStore } from "@/store/music";
-const music = useMusicStore()
-export function playMusic(list: any) {
+const musicStore = useMusicStore()
+export function addWaitingPlaylist(list: any) {
     // 如果是非数组类型，将他放到一个新的数组中
     if (Object.prototype.toString.call(list).slice(8, -1) !== 'Array') list = [list]
-    music.changeWaitingPlaylist(list)
+    musicStore.changeWaitingPlaylist(list)
 }
+
+// 播放音乐
+import { getMusicUrl } from "@/api/music";
+function playMusicFunc(audio: any) {
+    if (musicStore.musicDetail?.id === undefined) {
+        return ElNotification({
+            type: 'error',
+            message: '待播列表为空，请选择要播放的音乐！'
+        })
+    }
+    getMusicUrl(musicStore.musicDetail.id, 'standard').then(res => {
+        // 将返回的url替换为 https:// 安全协议
+        res.data.data[0].url = res.data.data[0].url.replace('http://', 'https://')
+        // 如果audio的url和接口返回的url不同 重新赋值
+        if(audio.value.src !== res.data.data[0].url) audio.value.src = res.data.data[0].url
+        if (audio.value.src.length > 0) {
+            isPaused.value = audio.value.paused
+            // 循环查看音频的网络状态
+            const timer = setInterval(() => {
+                // 当音频加载完成，播放或暂停
+                if (audio.value.networkState === 1) {
+                    clearInterval(timer)
+                    ElNotification({
+                        type: 'success',
+                        title: musicStore.musicDetail.name,
+                        message: audio.value.paused ? `播放成功!` : `暂停成功!`,
+                        duration: 2000
+                    })
+                    audio.value.paused ? audio.value.play() : audio.value.pause()
+                }
+            }, 200)
+        }
+    })
+}
+export const isPaused = ref(false)
+export const playMusic = debounce(playMusicFunc, 1000)
+
+// 上一首下一首
+import { debounce } from "./function";
+// 使用防抖函数，1秒内只能执行一次
+export const prevMusic = debounce(() => {
+    if (useMusicStore().waitingPlaylist.length === 1) { return }
+    useMusicStore().changeIndex(useMusicStore().index - 1)
+}, 1000)
+
+export const nextMusic = debounce(() => {
+    if (useMusicStore().waitingPlaylist.length === 1) { return }
+    useMusicStore().changeIndex(useMusicStore().index + 1)
+}, 1000)

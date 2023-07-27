@@ -10,7 +10,7 @@
             <el-text type="info">{{ playlist.createTime }}创建</el-text>
             <div class="button">
                 <el-button type="danger" size="large" @click="playAll">
-                    <svg-icon icon-class="playMusic" />&nbsp;播放全部
+                    <svg-icon icon-class="addWaitingPlaylist" />&nbsp;播放全部
                 </el-button>
             </div>
         </div>
@@ -34,11 +34,11 @@ getUserDetail(playlist.userId).then(res => {
 })
 
 // 播放当前歌单下的全部歌曲
-import { playMusic } from "@/utils/playlist";
+import { addWaitingPlaylist } from "@/utils/playlist";
 import { getMusicList } from "@/api/playlist";
 function playAll() {
     getMusicList(playlist.id).then(res => {
-        playMusic(res.data.songs)
+        addWaitingPlaylist(res.data.songs)
     })
 }
 </script>

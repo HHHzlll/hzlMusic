@@ -2,7 +2,7 @@
     <div class="waitingPlaylist">
         <svg-icon class="icon" icon-class="waitingPlaylist" @click="openWaitingPlaylist = !openWaitingPlaylist" />
         <Transition name="fade">
-            <el-table class="list" :data="musicStore.waitingPlaylist" v-show="openWaitingPlaylist" @row-dblclick="playMusic" max-height="70vh">
+            <el-table class="list" :data="musicStore.waitingPlaylist" v-show="openWaitingPlaylist" @row-dblclick="addWaitingPlaylist" max-height="70vh">
                 <el-table-column min-width="400px">
                     <template #default="scope">
                         <div class="musicTitle">
@@ -30,7 +30,7 @@
 <script setup lang="ts">
 import { useMusicStore } from "@/store/music";
 import { formatMilliseconds } from "@/utils/function";
-import { playMusic } from "@/utils/playlist";
+import { addWaitingPlaylist } from "@/utils/playlist";
 const musicStore = useMusicStore()
 
 const openWaitingPlaylist = ref(false)

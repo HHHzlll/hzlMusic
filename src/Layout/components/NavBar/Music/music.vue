@@ -1,7 +1,9 @@
 <template>
     <div class="music">
         <!-- audio -->
-        <audio ref="audio" :src="musicUrl.url" />
+        <audio ref="audio">
+
+        </audio>
         <div class="nav-left">
             <!-- 音乐信息 -->
             <div class="musicInfo">
@@ -17,7 +19,7 @@
             <!-- 按钮控件 -->
             <div class="buttonList">
                 <el-button @click="prevMusic()" type="danger" circle text><svg-icon icon-class="prevMusic" /></el-button>
-                <el-button type="danger" circle text @click="playMusic">
+                <el-button type="danger" circle text @click="handlePlayMusic">
                     <Transition name="fade" mode="out-in">
                         <svg-icon v-if="!isPaused" icon-class="playMusic" />
                         <svg-icon v-else icon-class="stopMusic" />
@@ -43,64 +45,23 @@ import playProgress from "./playProgress.vue";
 import volume from "./volume.vue";
 import waitingList from "./waitingList.vue";
 import { useMusicStore } from "@/store/music";
-import { getMusicUrl } from "@/api/music";
 const musicStore: any = useMusicStore()
 const audio = ref()
-const isPaused: Ref<boolean> = ref(false)
 
 // 监听歌曲信息，改变时播放音乐
-const musicUrl = ref({ url: '' })
+import { playMusic } from "@/utils/playlist";
+import { prevMusic, nextMusic } from "@/utils/playlist";
+import { isPaused } from "@/utils/playlist";
 watch(() => useMusicStore().musicDetail, () => {
-    playMusic()
+    playMusic(audio)
 }, { deep: true })
 // 监听播放列表，改变时将播放歌曲设为第一首
 watch(() => useMusicStore().waitingPlaylist, () => {
     useMusicStore().changeIndex(0)
 })
 
-// 播放音乐
-function playMusic() {
-    // 如果src存在
-    nextTick(() => { // 在下一次DOM更新后执行,避免audio元素未创建就读取值
-        if (musicStore.musicDetail?.id === undefined) {
-            return ElNotification({
-                type: 'error',
-                message: '待播列表为空，请选择要播放的音乐！'
-            })
-        }
-        getMusicUrl(musicStore.musicDetail.id, 'standard').then(res => {
-            // 将返回的url替换为 https:// 安全协议
-            res.data.data[0].url = res.data.data[0].url.replace('http://', 'https://')
-            musicUrl.value = res.data.data[0]
-            if (audio.value.src.length > 0) {
-                // 循环查看音频的网络状态
-                const timer = setInterval(() => {
-                    // 当音频加载完成，播放或暂停
-                    if (audio.value.networkState === 1) {
-                        isPaused.value = audio.value.paused
-                        clearInterval(timer)
-                        ElNotification({
-                            type: 'success',
-                            title: musicStore.musicDetail.name,
-                            message: isPaused.value ? `播放成功!` : `暂停成功!`,
-                            duration: 2000
-                        })
-                        isPaused.value ? audio.value.play() : audio.value.pause()
-                    }
-                }, 200)
-            }
-        })
-
-    })
-}
-
-function prevMusic() {
-    if (useMusicStore().waitingPlaylist.length === 1) { return }
-    useMusicStore().changeIndex(useMusicStore().index - 1)
-}
-function nextMusic() {
-    if (useMusicStore().waitingPlaylist.length === 1) { return }
-    useMusicStore().changeIndex(useMusicStore().index + 1)
+function handlePlayMusic() {
+    playMusic(audio)
 }
 </script>
 

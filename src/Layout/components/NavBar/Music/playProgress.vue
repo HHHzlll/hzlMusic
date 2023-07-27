@@ -9,6 +9,7 @@
 <script setup lang="ts">
 import { formatMilliseconds } from "@/utils/function";
 import { useMusicStore } from "@/store/music";
+import { nextMusic } from "@/utils/playlist";
 // 父组件的参数
 const prop = defineProps(['audio', 'isPaused'])
 // 当前进度
@@ -26,13 +27,16 @@ function setTime() {
     length.value = Number(prop.audio.duration.toFixed(0))
 
     // 播完自动下一首
-    if (progress.value === length.value && useMusicStore().waitingPlaylist.length > 1) {
-        useMusicStore().changeIndex(useMusicStore().index + 1)
+    if (prop.audio.ended) {
         // 如果播完且仅有一首歌，则重新播放
-    } else if (progress.value === length.value && useMusicStore().waitingPlaylist.length === 1) {
-        prop.audio.currentTime = 0
+        if (useMusicStore().waitingPlaylist.length === 1){
+            prop.audio.currentTime = 0
+            prop.audio.play()
+        }
+        nextMusic()
     }
 }
+
 // 改变播放进度
 function changeProgress(e: number) {
     prop.audio.currentTime = e

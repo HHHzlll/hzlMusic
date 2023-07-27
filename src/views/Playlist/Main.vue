@@ -9,8 +9,8 @@
                     <div>
                         <el-text size="large">{{ scope.row.name }}</el-text>
                         <br>
-                        <el-text size="small" type="info" v-for="item in scope.row.ar" :key="item.id">
-                            {{ item.name }}&nbsp;&nbsp;
+                        <el-text size="small" type="info" v-for="(item, index) in scope.row.ar" :key="item.id">
+                            {{ index + 1 === scope.row.ar.length ? item.name : item.name + ' / ' }}
                         </el-text>
                     </div>
                 </div>

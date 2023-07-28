@@ -1,6 +1,6 @@
 <template>
-    <div class="container">
-        <!-- <el-card v-for="item in prop.list" :key="item.id"
+    <div class="container" v-if="!prop.carousel">
+        <el-card v-for="item in prop.list" :key="item.id"
             @dblclick="addWaitingPlaylist(prop.list, item)">
             <el-image class="img" lazy :src="item.al.picUrl + '?param=60y60'" />
             <svg-icon icon-class="playMusic" />
@@ -14,10 +14,10 @@
                     {{ index + 1 === item.ar.length ? i.name : i.name + ' / ' }}
                 </el-text>
             </div>
-        </el-card> -->
+        </el-card>
     </div>
 
-    <el-carousel :autoplay="false" :loop="false" arrow="always" trigger="click" indicator-position="none">
+    <el-carousel :autoplay="false" :loop="false" arrow="always" trigger="click" indicator-position="none" v-if="prop.carousel">
         <el-carousel-item v-for="(item, index) in list" :key="index">
             <el-card v-for="i in item" @dblclick="addWaitingPlaylist(prop.list, i)">
                 <el-image class="img" :src="i.al.picUrl + '?param=60y60'" />
@@ -39,7 +39,11 @@
 
 <script setup lang="ts">
 import { addWaitingPlaylist } from "@/utils/playlist";
-const prop = defineProps(['list'])
+/*
+list: 渲染列表
+carousel：是否以轮播图的形式展示
+*/
+const prop = defineProps(['list', 'carousel'])
 
 const list: Ref<any> = ref([])
 for (let i = 0; i < Math.ceil(prop.list.length / 9); i++) {

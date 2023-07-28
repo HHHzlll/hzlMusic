@@ -13,7 +13,7 @@
                 </el-card>
             </template>
             <template #default>
-                <Song :list="dailyRecommendations" />
+                <Song :list="dailyRecommendations" :carousel="true" />
             </template>
         </el-skeleton>
     </div>

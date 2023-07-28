@@ -26,12 +26,12 @@ export const constantRoutes: RouteRecordRaw[] = [
                 component: () => import('@/views/recommend/index.vue'),
                 meta: { title: '为我推荐', icon: 'recommend' }
             },
-            {
-                path: 'likeMusic',
-                name: 'likeMusic',
-                component: () => import('@/views/likeMusic/index.vue'),
-                meta: { title: '我喜欢的音乐', icon: 'likeMusic' }
-            }
+            // {
+            //     path: 'likeMusic',
+            //     name: 'likeMusic',
+            //     component: () => import('@/views/likeMusic/index.vue'),
+            //     meta: { title: '我喜欢的音乐', icon: 'likeMusic' }
+            // }
         ]
     },
     {

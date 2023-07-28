@@ -37,6 +37,7 @@ declare module 'vue' {
     ElTable: typeof import('element-plus/es')['ElTable']
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     ElTableV2: typeof import('element-plus/es')['ElTableV2']
+    ElTag: typeof import('element-plus/es')['ElTag']
     ElText: typeof import('element-plus/es')['ElText']
     Header: typeof import('./../components/Playlist/Header.vue')['default']
     HelloWorld: typeof import('./../components/HelloWorld.vue')['default']
@@ -50,6 +51,8 @@ declare module 'vue' {
     Playlist: typeof import('./../components/Music/playlist.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Song: typeof import('./../components/Song/Song.vue')['default']
+    SongList: typeof import('./../components/SongList/SongList.vue')['default']
     SvgIcon: typeof import('./../components/SvgIcon/index.vue')['default']
     WaitingList: typeof import('./../components/Music/waitingList.vue')['default']
   }

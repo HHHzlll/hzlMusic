@@ -9,3 +9,11 @@ export function getRecommendList(limit?:number) {
         params
     })
 }
+
+// 日推
+export function getDailyRecommendations() {
+    return request({
+        url: '/recommend/songs',
+        method: 'get'
+    })
+}

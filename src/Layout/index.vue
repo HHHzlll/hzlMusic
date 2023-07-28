@@ -39,4 +39,8 @@ watch(() => usePlaylistStore().playlistDetail, () => {
 .el-main {
     height: calc(100vh - 80px);
 }
+
+*>*{
+    background-color: var(--bg-color);
+}
 </style>

@@ -103,7 +103,7 @@ for (let i = 0; i < Math.ceil(prop.list.length / 9); i++) {
 }
 
 .el-card:hover {
-    background: #fff;
+    background: #F0F3F6;
 }
 
 .el-card:hover .svg-icon {

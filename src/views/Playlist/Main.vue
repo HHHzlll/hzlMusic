@@ -56,4 +56,8 @@ import { addWaitingPlaylist } from "@/utils/playlist";
     border-radius: 8px;
     margin-right: .5rem;
 }
+
+.el-table__inner-wrapper{
+    background-color: var(--bg-color);
+}
 </style>

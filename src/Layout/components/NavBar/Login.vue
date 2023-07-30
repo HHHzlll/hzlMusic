@@ -47,6 +47,7 @@ function handleLogin() {
                     if (res.data.code === 803) {
                         // 7、将token存入pinia
                         user.changeToken(res.data.cookie)
+                        document.cookie = res.data.cookie
                         // 8、将用户信息存入pinia
                         getLoginStatus(user.token).then(res => user.changeUserInfo(res.data.data))
                         ElMessage({

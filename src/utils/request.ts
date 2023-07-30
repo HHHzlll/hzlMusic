@@ -1,18 +1,16 @@
 //  src/utils/request.ts
 import axios from 'axios';
-import { userStore } from "@/store/user";
 
 // 创建 axios 实例
 const service = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_API,
   timeout: 50000,
+  withCredentials: true
 });
 
 // 请求拦截器
 service.interceptors.request.use(
   config => {
-    if(config.params === undefined) config.params = {}
-    config.params.cookie = userStore().token
     return config
   }
 );

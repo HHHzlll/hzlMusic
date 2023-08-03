@@ -2,8 +2,8 @@
     <el-card :body-style="{ padding: '0px' }" shadow="hover" v-for="item in prop.list" :key="item.id" v-once
         @click="getPlaylistDetail(item.id)">
         <svg-icon icon-class="playMusic" />
-        <el-image class="listImg" :src="item.picUrl + '?param=200y200'" lazy />
-        <el-image class="blurListImg" :src="item.picUrl + '?param=200y60'" lazy />
+        <el-image class="listImg" :src="item.picUrl ? item.picUrl + '?param=200y200': item.cover" />
+        <el-image class="blurListImg" :src="item.picUrl ? item.picUrl + '?param=200y60': item.cover" />
         <span class="listInfo">{{ item.name }}</span>
     </el-card>
 </template>
@@ -13,6 +13,9 @@
 import { getPlaylistDetail } from "@/utils/playlist";
 
 const prop = defineProps(['list'])
+
+console.log(prop.list);
+
 </script>
 
 <style scoped>
@@ -36,8 +39,9 @@ const prop = defineProps(['list'])
 }
 
 .blurListImg {
-    filter: blur(20px);
-    transform: scale(2);
+    /* filter: blur(20px); */
+    filter: blur(50px);
+    /* transform: scale(1); */
 }
 
 .listInfo {

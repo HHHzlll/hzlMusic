@@ -1,11 +1,11 @@
 <template>
-    <div class="main">
+    <el-scrollbar class="main">
         <router-view v-slot="{ Component }">
             <Transition name="fade" appear mode="out-in">
                 <component :is="Component" />
             </Transition>
         </router-view>
-    </div>
+    </el-scrollbar>
 </template>
 
 <style scoped>

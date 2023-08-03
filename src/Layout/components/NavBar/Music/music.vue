@@ -1,9 +1,8 @@
 <template>
     <div class="music">
         <!-- audio -->
-        <audio ref="audio">
+        <audio ref="audio" />
 
-        </audio>
         <div class="nav-left">
             <!-- 音乐信息 -->
             <div class="musicInfo">

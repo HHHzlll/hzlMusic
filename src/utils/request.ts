@@ -17,6 +17,16 @@ service.interceptors.request.use(
 
 // 响应拦截器
 service.interceptors.response.use(
+  res => {
+    return res
+  },
+  err => {
+    console.log(err);
+    ElMessage({
+      message: err.message,
+      type: 'error'
+    })
+  }
 );
 
 // 导出 axios 实例

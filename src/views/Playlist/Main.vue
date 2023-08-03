@@ -1,5 +1,5 @@
 <template>
-    <el-table :data="musicList" v-loading="loading" height="calc(100vh - 470px)"
+    <el-table :data="musicList" v-loading="loading" 
         @row-dblclick="addWaitingPlaylist(musicList, $event)">
         <el-table-column type="index" label="#" width="50px" />
         <el-table-column label="标题" min-width="400px">

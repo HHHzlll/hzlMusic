@@ -10,7 +10,7 @@
             <el-text type="info">{{ playlist.createTime }}创建</el-text>
             <div class="button">
                 <el-button type="danger" size="large" @click="playAll">
-                    <svg-icon icon-class="addWaitingPlaylist" />&nbsp;播放全部
+                    <svg-icon icon-class="playMusic" />&nbsp;播放全部
                 </el-button>
             </div>
         </div>

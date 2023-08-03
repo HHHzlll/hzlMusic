@@ -41,7 +41,7 @@ export function playMusic(audio: any) {
     }
     getMusicUrl(musicStore.musicDetail.id, 'standard').then(res => {
         // 将返回的url替换为 https:// 安全协议
-        res.data.data[0].url = res.data.data[0].url.replace('http://', 'https://')
+        // res.data.data[0].url = res.data.data[0].url.replace('http://', 'https://')
         // 如果audio的url和接口返回的url不同 重新赋值
         if (audio.value.src !== res.data.data[0].url) audio.value.src = res.data.data[0].url
         if (audio.value.src.length > 0) {

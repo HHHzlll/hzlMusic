@@ -1,4 +1,5 @@
 <template>
+    <!-- 普通列表形式 -->
     <div class="container" v-if="!prop.carousel">
         <el-card v-for="item in prop.list" :key="item.id"
             @dblclick="addWaitingPlaylist(prop.list, item)">
@@ -17,6 +18,7 @@
         </el-card>
     </div>
 
+    <!-- 轮播图形式 -->
     <el-carousel :autoplay="false" :loop="false" arrow="always" trigger="click" indicator-position="none" v-if="prop.carousel">
         <el-carousel-item v-for="(item, index) in list" :key="index">
             <el-card v-for="i in item" @dblclick="addWaitingPlaylist(prop.list, i)">
@@ -35,6 +37,7 @@
             </el-card>
         </el-carousel-item>
     </el-carousel>
+
 </template>
 
 <script setup lang="ts">

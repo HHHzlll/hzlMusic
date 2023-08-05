@@ -50,4 +50,5 @@ function loadMore(e: Element) {
 
 </script>
 
-<style scoped></style>
+<style scoped>
+</style>

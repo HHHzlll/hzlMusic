@@ -1,7 +1,7 @@
 <template>
     <div class="waitingPlaylist">
         <svg-icon class="icon" icon-class="waitingPlaylist" @click="openWaitingPlaylist = !openWaitingPlaylist" />
-        <el-table :class="{ open: !openWaitingPlaylist, list: true }" :data="musicStore.waitingPlaylist"
+        <el-table :class="{ open: openWaitingPlaylist, list: true }" :data="musicStore.waitingPlaylist"
             @row-dblclick="addWaitingPlaylist(musicStore.waitingPlaylist, $event)" max-height="80vh">
             <el-table-column min-width="400px">
                 <template #default="scope">
@@ -55,12 +55,13 @@ const openWaitingPlaylist = ref(false)
     z-index: 10;
     width: 500px;
     box-shadow: 0 0 10px #ccc;
-    transition: opacity .5s;
+    transform: scale(0);
+    transform-origin: top center;
+    transition: all .5s;
 }
 
 .open {
-    opacity: 0;
-    z-index: -10;
+    transform: scale(1);
 }
 
 .musicTitle {

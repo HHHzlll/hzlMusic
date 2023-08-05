@@ -10,3 +10,6 @@ import SongList from "@/components/SongList/SongList.vue";
 const prop = defineProps(['list'])
 console.log(prop.list);
 </script>
+
+<style scoped>
+</style>

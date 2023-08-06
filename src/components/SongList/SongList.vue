@@ -14,8 +14,6 @@ import { getPlaylistDetail } from "@/utils/playlist";
 
 const prop = defineProps(['list'])
 
-console.log(prop.list);
-
 </script>
 
 <style scoped>

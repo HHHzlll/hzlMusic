@@ -52,7 +52,7 @@ const openWaitingPlaylist = ref(false)
     position: absolute;
     right: 0;
     top: 100px;
-    z-index: 10;
+    z-index: 11;
     width: 500px;
     box-shadow: 0 0 10px #ccc;
     transform: scale(0);

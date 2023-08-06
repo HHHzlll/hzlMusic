@@ -21,7 +21,6 @@ service.interceptors.response.use(
     return res
   },
   err => {
-    console.log(err);
     ElMessage({
       message: err.message,
       type: 'error'

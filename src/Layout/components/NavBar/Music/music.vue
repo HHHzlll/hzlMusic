@@ -1,7 +1,7 @@
 <template>
     <div class="music">
         <!-- audio -->
-        <audio ref="audio" />
+        <audio ref="audio" @timeupdate="audioChange"></audio>
 
         <div class="nav-left">
             <!-- 音乐信息 -->
@@ -33,6 +33,10 @@
         <div class="nav-right">
             <!-- 音量 -->
             <volume :audio="audio" />
+            <!-- 歌词 -->
+            <Suspense>
+                <lyric :audio="audio" ref="lrc" />
+            </Suspense>
             <!-- 播放列表 -->
             <waitingList />
         </div>
@@ -43,6 +47,7 @@
 import playProgress from "./playProgress.vue";
 import volume from "./volume.vue";
 import waitingList from "./waitingList.vue";
+import lyric from "./lyric.vue";
 import { useMusicStore } from "@/store/music";
 const musicStore: any = useMusicStore()
 const audio = ref()
@@ -57,6 +62,12 @@ watch(() => useMusicStore().musicDetail, () => {
 
 function handlePlayMusic() {
     playMusic(audio)
+}
+
+// 使用ref获得子组件 调用他的函数
+const lrc = ref()
+function audioChange(){
+    lrc.value.setOffset()
 }
 </script>
 

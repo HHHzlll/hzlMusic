@@ -10,6 +10,15 @@ export function getMusicUrl(id: number | number[], level: string) {
     })
 }
 
+// 获取歌词
+export function getLyric(id: number) {
+    return request({
+        url: '/lyric?id=' + id,
+        method: 'get'
+    })
+}
+
+
 // 喜欢音乐
 export function likeMusic(id: number, like: boolean) {
     const params = { id, like }
@@ -26,7 +35,7 @@ export function addToPlaylist(o: boolean, pid: number, tracks: number | Array<nu
     let op: string = ''
     o ? op = 'add' : op = 'del'
     // 删除还是添加，歌单id，歌曲id
-    const params = { op, pid, tracks}
+    const params = { op, pid, tracks }
     return request({
         url: '/playlist/tracks',
         method: 'get',

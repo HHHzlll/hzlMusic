@@ -23,6 +23,7 @@ const prop = defineProps(['audio']) // audio的DOM
 
 // 监听歌曲信息变化，改变歌词
 watch(() => useMusicStore().musicDetail, async () => {
+    if(useMusicStore().musicDetail.id === undefined) return
     const { data } = await getLyric(useMusicStore().musicDetail.id)
     lyric.value = parseLyric(data.lrc.lyric)
 }, { immediate: true })

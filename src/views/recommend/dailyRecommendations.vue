@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h2 class="title">您的每日推荐<svg-icon icon-class="right" /></h2>
+        <h2>您的每日推荐</h2>
         <el-skeleton :loading="loading" animated :count="9">
             <template #template>
                 <el-card>

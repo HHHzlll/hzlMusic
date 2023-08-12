@@ -7,7 +7,7 @@
             <!-- 音乐信息 -->
             <div class="musicInfo">
                 <el-avatar :class="[{ rotate: isPaused }, { musicImg: true }]"
-                    :src="musicStore.musicDetail?.al?.picUrl + '?param=50y50'" :size="60" />
+                    :src="musicStore.musicDetail?.al?.picUrl + '?param=50y50'" :size="50" />
                 <el-text size="large" tag="b" truncated>
                     {{ musicStore.musicDetail?.name }}
                     <el-text size="small" type="info" tag="p" v-for="item in musicStore.musicDetail?.ar">{{ item?.name
@@ -66,7 +66,7 @@ function handlePlayMusic() {
 
 // 使用ref获得子组件 调用他的函数
 const lrc = ref()
-function audioChange(){
+function audioChange() {
     lrc.value.setOffset()
 }
 </script>
@@ -102,6 +102,7 @@ function audioChange(){
 
 .musicImg {
     margin: 0 1rem;
+    box-shadow: 0 0 0 8px #000;
 }
 
 .rotate {

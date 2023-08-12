@@ -1,5 +1,5 @@
 <template>
-    <h2 class="title">推荐歌单<svg-icon icon-class="right" /></h2>
+    <h2>推荐歌单</h2>
     <el-skeleton :loading="loading" animated :count="limit">
         <template #template>
             <el-card :body-style="{ padding: '0px' }" shadow="hover">

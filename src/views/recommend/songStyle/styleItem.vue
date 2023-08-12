@@ -1,5 +1,5 @@
 <template>
-    <h2 class="title">
+    <h2>
         {{ prop.list.title.showText ? prop.list.title.showText : prop.list.title.tagName }}
     </h2>
     <SongList :list="prop.list.data" />

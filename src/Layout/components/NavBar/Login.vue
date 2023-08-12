@@ -8,7 +8,7 @@
             </template>
         </el-popconfirm>
         <!-- 登录对话框 -->
-        <el-drawer v-model="open" width="500px">
+        <el-drawer v-model="open" size="50%">
             <h2>请使用网易云音乐App 扫码登录</h2>
             <p>{{ loginStatus }}</p>
             <el-divider />

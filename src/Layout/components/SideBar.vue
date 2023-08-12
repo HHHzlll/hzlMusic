@@ -18,10 +18,10 @@
                 </template>
                 <el-menu-item v-for="item in userPlaylist" :key="item.id" @click="getPlaylistDetail(item.id)">
                     <el-avatar :src="item.coverImgUrl + '?param=50y50'" :size="30" />
-                    <!-- <el-text truncated>{{ item.name }}</el-text> -->
-                    {{ item.name.length > 6 ? item.name.slice(0, 5) + '...' : item.name }}
+                    <el-text truncated>{{ item.name }}</el-text>
                 </el-menu-item>
             </el-sub-menu>
+            <el-text v-else>登录后查看更多~</el-text>
         </el-menu>
     </div>
 </template>
@@ -77,6 +77,7 @@ function userLogin() {
 
 .menu {
     padding: 1rem;
+    border: none;
     --el-menu-bg-color: opacity: 0;
     --el-menu-text-color: #787F8D;
     --el-menu-active-color: #FFFFFF;

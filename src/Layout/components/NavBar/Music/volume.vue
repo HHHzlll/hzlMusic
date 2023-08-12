@@ -1,7 +1,7 @@
 <template>
     <div class="volume">
-        <svg-icon v-if="!(volume > 0)" @click="volume = 100" class="icon" icon-class="volume-open"></svg-icon>
-        <svg-icon v-else @click="volume = 0" class="icon" icon-class="volume-close"></svg-icon>
+        <svg-icon v-if="!(volume > 0)" @click="volume = 100" class="icon scale" icon-class="volume-open"></svg-icon>
+        <svg-icon v-else @click="volume = 0" class="icon scale" icon-class="volume-close"></svg-icon>
         <el-slider v-model="volume" />
     </div>
 </template>

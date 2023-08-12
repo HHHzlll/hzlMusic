@@ -1,15 +1,16 @@
 <template>
     <div class="lyric">
-        <el-text type="danger" tag="b" @click="openLyric = !openLyric">词</el-text>
+        <el-text class="scale" type="danger" tag="b" @click="openLyric = !openLyric">词</el-text>
 
         <div :class="{ open: openLyric, list: true }" ref="div">
-            <ul class="lyric" :style="{ transform: `translateY(${offset}px)` }">
+            <ul class="lyric" :style="{ transform: `translateY(${offset}px)` }" v-if="lyric">
                 <li v-for="(item, index) in  lyric " :key="item.time" :class="{ active: index === lightIndex }"
                     @click="$props.audio.currentTime = item.time"
                     :style="{ height: liHeight + 'px', lineHeight: liHeight + 'px', }">
                     {{ item.words }}
                 </li>
             </ul>
+            <span v-else>暂未播放歌曲</span>
         </div>
     </div>
 </template>

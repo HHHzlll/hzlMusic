@@ -1,6 +1,6 @@
 <template>
     <div class="waitingPlaylist">
-        <svg-icon class="icon" icon-class="waitingPlaylist" @click="openWaitingPlaylist = !openWaitingPlaylist" />
+        <svg-icon class="icon scale" icon-class="waitingPlaylist" @click="openWaitingPlaylist = !openWaitingPlaylist" />
         <el-table :class="{ open: openWaitingPlaylist, list: true }" :data="musicStore.waitingPlaylist"
             @row-dblclick="addWaitingPlaylist(musicStore.waitingPlaylist, $event)" max-height="80vh">
             <el-table-column min-width="400px">

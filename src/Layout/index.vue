@@ -38,6 +38,7 @@ watch(() => usePlaylistStore().playlistDetail, () => {
 <style scoped>
 .el-main {
     height: calc(100vh - 80px);
+    padding-right: 0;
 }
 
 *>*{

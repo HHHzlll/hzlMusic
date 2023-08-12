@@ -4,7 +4,7 @@
         <svg-icon icon-class="playMusic" />
         <el-image class="listImg" :src="item.picUrl ? item.picUrl + '?param=200y200': item.cover" />
         <el-image class="blurListImg" :src="item.picUrl ? item.picUrl + '?param=200y60': item.cover" />
-        <span class="listInfo">{{ item.name }}</span>
+        <el-text class="listInfo">{{ item.name }}</el-text>
     </el-card>
 </template>
 
@@ -37,16 +37,15 @@ const prop = defineProps(['list'])
 }
 
 .blurListImg {
-    /* filter: blur(20px); */
     filter: blur(50px);
-    /* transform: scale(1); */
+    transform: scale(1);
 }
 
 .listInfo {
     position: absolute;
     display: block;
+    height: 60px;
     bottom: 0;
-    font-size: .9rem;
     padding: .5rem;
 }
 

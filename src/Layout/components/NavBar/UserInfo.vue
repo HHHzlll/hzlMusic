@@ -19,18 +19,13 @@ const user: any = userStore()
 .userInfo {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    position: relative;
 }
 
 .avatar {
-    position: absolute;
-    left: 0;
-    border-radius: 50%;
     margin: 0 .5rem;
 }
 
 .el-text {
-    padding-left: 50px;
+    width: fit-content;
 }
 </style>

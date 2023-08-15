@@ -42,18 +42,24 @@ body {
   position: relative;
 }
 
+h2 {
+  margin: 1rem 0;
+}
+
+img {
+  pointer-events: none;
+}
+
+/* 鼠标移入放大 */
 .scale {
-  transition: transform .2s;
+  transition: .2s;
 }
 
 .scale:hover {
   transform: scale(1.1);
 }
 
-h2 {
-  margin: 1rem 0;
-}
-
+/* 防止 el-avatar 被其他元素挤变形 */
 .el-avatar {
   overflow: visible !important;
 }

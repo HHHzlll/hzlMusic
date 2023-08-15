@@ -10,7 +10,7 @@
                     {{ item.words }}
                 </li>
             </ul>
-            <span v-else>暂未播放歌曲</span>
+            <span v-else style="line-height: 5;">暂未播放歌曲</span>
         </div>
     </div>
 </template>

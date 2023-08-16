@@ -52,6 +52,8 @@ img {
 
 /* 鼠标移入放大 */
 .scale {
+  /* 行盒不能触发transform */
+  display: block;
   transition: .2s;
 }
 

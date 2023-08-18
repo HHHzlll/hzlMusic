@@ -26,9 +26,9 @@ watch(() => usePlaylistStore().playlistDetail, () => {
                     <NavBar />
                 </el-header>
                 <el-main>
-                    <KeepAlive>
+                    <!-- <KeepAlive> -->
                         <AppMain :is="true" />
-                    </KeepAlive>
+                    <!-- </KeepAlive> -->
                 </el-main>
             </el-container>
         </el-container>

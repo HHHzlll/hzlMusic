@@ -1,8 +1,9 @@
 import request from '@/utils/request.ts'
 
+// 浏览器会默认缓存所有的GET请求，添加一个时间戳让浏览器认为这是不同的请求，不要走缓存
 // 获取歌单详细信息
 export function getPlaylist(id: number) {
-    const params = { id }
+    const params = { id, timestamp: new Date().getTime() }
     return request({
         url: '/playlist/detail',
         method: 'get',
@@ -12,7 +13,7 @@ export function getPlaylist(id: number) {
 
 // 获取歌曲列表
 export function getMusicList(id: number, limit?: number, offset?: number) {
-    const params = { id, limit, offset }
+    const params = { id, limit, offset, timestamp: new Date().getTime() }
     return request({
         url: '/playlist/track/all',
         method: 'get',

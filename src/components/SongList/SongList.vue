@@ -3,7 +3,7 @@
         @click="getPlaylistDetail(item.id)">
         <svg-icon icon-class="playMusic" />
         <el-image class="listImg" :src="item.picUrl ? item.picUrl + '?param=200y200': item.cover" />
-        <el-image class="blurListImg" :src="item.picUrl ? item.picUrl + '?param=200y60': item.cover" />
+        <el-image :src="item.picUrl ? item.picUrl + '?param=200y60': item.cover" />
         <el-text class="listInfo">{{ item.name }}</el-text>
     </el-card>
 </template>
@@ -35,18 +35,15 @@ const prop = defineProps(['list'])
     height: 100%;
     transition: filter .3s;
 }
-
-.blurListImg {
-    filter: blur(50px);
-    transform: scale(1);
-}
-
 .listInfo {
+    color: #fff;
     position: absolute;
     display: block;
+    width: 100%;
     height: 60px;
     bottom: 0;
     padding: .5rem;
+    backdrop-filter: blur(200px);
 }
 
 .svg-icon {

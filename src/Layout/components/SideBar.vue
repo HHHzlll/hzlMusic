@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <el-scrollbar height="100vh" class="container">
         <el-menu :default-active="route.path" :default-openeds="['user']" router class="menu">
             <el-menu-item>
                 <el-avatar :size="30"
@@ -23,7 +23,7 @@
             </el-sub-menu>
             <el-text v-else>登录后查看更多~</el-text>
         </el-menu>
-    </div>
+    </el-scrollbar>
 </template>
 
 <script setup lang="ts">
@@ -56,7 +56,7 @@ function userLogin() {
 
 <style scoped>
 /* 侧边栏高度铺满 */
-.container {
+.container, ul {
     height: 100vh;
     background: #F0F3F6;
 }

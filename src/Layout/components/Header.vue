@@ -21,7 +21,7 @@ async function handleSearch() {
  * @param cb el-autocomplete自带的回调函数，接收[{value: '', link: ''}]类型的搜索列表
  * */
 async function searchSuggestAsync(queryString: string, cb: any) {
-  const suggest: any = await searchSuggest(searchContent.value)
+  const suggest: any = await searchSuggest(queryString)
   const result: any = suggest.data.result.allMatch.map((item: any) => {
     return {'value': item.keyword}
   })

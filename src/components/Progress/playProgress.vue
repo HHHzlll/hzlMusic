@@ -7,9 +7,9 @@
 </template>
 
 <script setup lang="ts">
-import { formatMilliseconds } from "@/utils/function";
-import { useMusicStore } from "@/store/music";
-import { nextMusic } from "@/utils/playlist";
+import { formatMilliseconds } from "@/utils/function.ts";
+import { useMusicStore } from "@/store/music.ts";
+import { nextMusic } from "@/utils/playlist.ts";
 // 父组件的参数
 const prop = defineProps(['audio', 'isPaused'])
 // 当前进度
@@ -45,8 +45,8 @@ function changeProgress(e: number) {
 
 <style scoped>
 .play-progress {
-    width: 300%;
-    transform: translateX(-33%);
+    width: 500px;
+    transform: translateX(-40%);
     display: flex;
     align-items: center;
     justify-content: space-between;

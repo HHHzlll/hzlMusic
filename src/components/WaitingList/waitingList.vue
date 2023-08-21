@@ -28,9 +28,9 @@
 </template>
 
 <script setup lang="ts">
-import { useMusicStore } from "@/store/music";
-import { formatMilliseconds } from "@/utils/function";
-import { addWaitingPlaylist } from "@/utils/playlist";
+import { useMusicStore } from "@/store/music.ts";
+import { formatMilliseconds } from "@/utils/function.ts";
+import { addWaitingPlaylist } from "@/utils/playlist.ts";
 const musicStore = useMusicStore()
 
 const openWaitingPlaylist = ref(false)
@@ -49,14 +49,14 @@ const openWaitingPlaylist = ref(false)
 }
 
 .list {
-    position: absolute;
-    right: 0;
-    top: 100px;
+    position: fixed;
+    right: 50px;
+    bottom: 100px;
     z-index: 11;
     width: 500px;
     box-shadow: 0 0 10px #ccc;
     transform: scale(0);
-    transform-origin: top center;
+    transform-origin: bottom right;
     transition: all .5s;
 }
 

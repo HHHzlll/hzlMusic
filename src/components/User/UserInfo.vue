@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { userStore } from "@/store/user";
+import { userStore } from "@/store/user.ts";
 
 const user: any = userStore()
 </script>

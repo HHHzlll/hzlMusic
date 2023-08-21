@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { createQrKey, createQr, checkQr, getLoginStatus, logout } from "@/api/user/index.ts";
+import { createQrKey, createQr, checkQr, getLoginStatus, logout } from "@/api/user";
 
 import { userStore } from "@/store/user.ts";
 const user = userStore()    // 用户的pinia状态

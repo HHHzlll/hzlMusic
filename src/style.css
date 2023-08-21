@@ -13,6 +13,8 @@
 
   --primary-color: #FC3D49;
   --bg-color: #FDFDFE;
+  --max-width: 2560px;
+  --min-width: 1044px;
 }
 
 * {
@@ -37,8 +39,8 @@ body {
 #app {
   margin: 0 auto;
   min-height: 100vh;
-  min-width: 1044px;
-  max-width: 2560px;
+  min-width: var(--min-width);
+  max-width: var(--max-width);
   position: relative;
 }
 

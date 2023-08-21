@@ -47,6 +47,18 @@ export const constantRoutes: RouteRecordRaw[] = [
                 beforeEnter: [playlistRedirect]
             }
         ]
+    },
+    {
+        path: '/search',
+        name: 'search',
+        component: Layout,
+        redirect: '/search/detail',
+        children: [
+            {
+                path: 'detail',
+                component: () => import('@/components/Search/index.vue')
+            }
+        ]
     }
 ]
 

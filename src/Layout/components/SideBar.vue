@@ -67,7 +67,7 @@ function userLogin() {
 }
 
 .title {
-    font-family: "STHupo";
+    font-family: "STHupo",serif;
 }
 
 /* 菜单栏 */

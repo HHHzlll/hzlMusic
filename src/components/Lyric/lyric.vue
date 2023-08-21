@@ -16,8 +16,8 @@
 </template>
 
 <script setup lang="ts">
-import { getLyric } from "@/api/music";
-import { useMusicStore } from "@/store/music";
+import { getLyric } from "@/api/music.ts";
+import { useMusicStore } from "@/store/music.ts";
 const openLyric = ref(false) // 开关歌词
 const lyric: any = ref('') // 歌词
 const prop = defineProps(['audio']) // audio的DOM
@@ -100,16 +100,16 @@ defineExpose({ setOffset });
 }
 
 .list {
-    position: absolute;
-    right: 0;
-    top: 100px;
+    position: fixed;
+    right: 50px;
+    bottom: 100px;
     z-index: 11;
     width: 500px;
     height: 80vh;
     overflow: hidden;
     box-shadow: 0 0 10px #ccc;
     transform: scale(0);
-    transform-origin: top center;
+    transform-origin: bottom right;
     transition: all .5s;
     background-color: #fff;
     text-align: center;

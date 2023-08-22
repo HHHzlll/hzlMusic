@@ -3,7 +3,7 @@
     <div class="container" v-if="!prop.carousel">
         <el-card v-for="item in prop.list" :key="item.id"
             @dblclick="addWaitingPlaylist(prop.list, item)">
-            <el-image class="img" lazy :src="item.al.picUrl + '?param=60y60'" />
+            <el-image class="img" :src="item.al.picUrl + '?param=60y60'" />
             <svg-icon icon-class="playMusic" />
             <div class="info">
                 <el-text size="large">{{ item.name }}</el-text>

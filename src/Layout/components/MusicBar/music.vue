@@ -2,6 +2,7 @@
   <div class="music">
     <!-- audio -->
     <audio ref="audio" @timeupdate="audioChange"></audio>
+    <playProgress :audio="audio" :isPaused="isPaused"/>
 
     <div class="nav-left">
       <!-- 音乐信息 -->
@@ -16,7 +17,9 @@
           </el-text>
         </el-text>
       </div>
+    </div>
 
+    <div class="nav-center">
       <!-- 按钮控件 -->
       <div class="buttonList">
         <el-button class="scale" @click="prevMusic()" type="danger" circle text>
@@ -31,10 +34,9 @@
         <el-button class="scale" @click="nextMusic()" type="danger" circle text>
           <svg-icon icon-class="nextMusic"/>
         </el-button>
-
-        <playProgress :audio="audio" :isPaused="isPaused"/>
       </div>
     </div>
+
 
     <div class="nav-right">
       <!-- 音量 -->
@@ -81,7 +83,7 @@ function audioChange() {
 </script>
 
 <style scoped>
-.music{
+.music {
   height: 100%;
   width: 100%;
   padding: 0 1rem;
@@ -92,19 +94,15 @@ function audioChange() {
   position: relative;
 }
 
-.musicInfo{
+.musicInfo {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.nav-left {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 50%;
+.buttonList{
+  margin-bottom: 10px;
 }
-
 .nav-right {
   display: flex;
   align-items: center;

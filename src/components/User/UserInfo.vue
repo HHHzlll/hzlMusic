@@ -4,13 +4,14 @@
         <el-text truncated>{{ user.userInfo.profile.nickname }}</el-text>
     </div>
     <div class="userInfo" v-else>
-        <el-avatar :size="40" class="avatar" />
+        <el-avatar :size="40" class="avatar" :src="anonymous"/>
         <el-text truncated>游客</el-text>
     </div>
 </template>
 
 <script setup lang="ts">
 import { userStore } from "@/store/user.ts";
+import anonymous from '@/assets/icons/anonymous.svg'
 
 const user: any = userStore()
 </script>

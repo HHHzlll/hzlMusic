@@ -2,7 +2,9 @@
 import { getPlaylist } from "@/api/playlist";
 import { usePlaylistStore } from "@/store/playlist";
 
-// 传入歌单 id 获取歌单详情，在 Layout/index.vue 会监听歌单详情，达成跳转到歌单内的方法
+/**
+ * 传入歌单 id 获取歌单详情，在 Layout/index.vue 会监听歌单详情，达成跳转到歌单内的方法
+ * @param id 歌单id*/
 export function getPlaylistDetail(id: number) {
     const playlistStore = usePlaylistStore()
     getPlaylist(id).then(res => {
@@ -11,7 +13,9 @@ export function getPlaylistDetail(id: number) {
     })
 }
 
-// 将歌曲添加到待播列表，参数是歌曲的详细信息
+/**
+ * 将歌曲添加到待播列表，参数是歌曲的详细信息
+ * @param list 歌曲列表*/
 import { useMusicStore } from "@/store/music";
 const musicStore = useMusicStore()
 export async function addWaitingPlaylist(list: any, row?: any) {
@@ -30,8 +34,10 @@ export async function addWaitingPlaylist(list: any, row?: any) {
     await musicStore.changeWaitingPlaylist(list)
 }
 
-// 播放音乐
-import { getMusicUrl } from "@/api/music";
+/**
+* 播放音乐
+* @param audio 音频DOM*/
+import {getMusicUrl} from "@/api/music";
 export function playMusic(audio: any) {
     if (musicStore.musicDetail?.id === undefined) {
         return ElNotification({
@@ -61,12 +67,14 @@ export function playMusic(audio: any) {
                 }
             }, 200)
         }
+    }).catch(err => {
+        console.log(err)
     })
 }
 export const isPaused = ref(false)
-// export const playMusic = debounce(playMusicFunc, 0)
 
-// 上一首下一首
+/**
+ * 上一首下一首*/
 import { debounce } from "./function";
 // 使用防抖函数，1秒内只能执行一次
 export const prevMusic = debounce(() => {

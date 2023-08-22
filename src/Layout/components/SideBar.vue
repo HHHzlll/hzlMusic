@@ -1,9 +1,9 @@
 <template>
     <el-scrollbar height="100vh" class="container">
         <el-menu :default-active="route.path" :default-openeds="['user']" router class="menu">
-            <el-menu-item>
+            <el-menu-item @click="router.push({name:'Home'})">
                 <el-avatar :size="30"
-                    src="https://gimg3.baidu.com/topone/src=https%3A%2F%2Fbkimg.cdn.bcebos.com%2Fpic%2F838ba61ea8d3fd1fa92d29173d4e251f95ca5ff3%3Fx-bce-process%3Dimage%2Fresize%2Cm_pad%2Cw_348%2Ch_348%2Cradius_50%2Csigma_50&refer=http%3A%2F%2Fwww.baidu.com&app=2011&size=f200,200&n=0&g=0n&er=404&q=75&fmt=auto&maxorilen2heic=2000000?sec=1689526800&t=5ef618838f6b3c3279259f47592c163e" />
+                    :src="logo" />
                 <h2 class="title">{{ title }}</h2>
             </el-menu-item>
             <!-- 列表渲染所有路由 -->
@@ -28,6 +28,7 @@
 
 <script setup lang="ts">
 import { useRoute, useRouter } from 'vue-router';
+import logo from '@/assets/logo.webp'
 const route = useRoute()
 
 // 获取所有路由列表

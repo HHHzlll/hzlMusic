@@ -1,16 +1,16 @@
 <template>
-    <el-scrollbar class="main">
+    <div class="main">
         <router-view v-slot="{ Component }">
             <Transition name="fade" appear mode="out-in">
                 <component :is="Component" />
             </Transition>
         </router-view>
-    </el-scrollbar>
+    </div>
 </template>
 
 <style scoped>
 .main {
-    max-height: calc(100vh - 80px);
+    max-height: calc(100vh - 80px - 60px);
 }
 
 .fade-enter-from,

@@ -1,33 +1,45 @@
 <script setup lang="ts">
-import Song from '@/components/Song/Song.vue'
-import {search} from "@/api/search.ts";
-import {Ref} from "vue";
-import {useRoute} from "vue-router";
+import Single from "@/views/Search/tabs/Single.vue";
+import Album from "@/views/Search/tabs/Album.vue";
+import Singer from "@/views/Search/tabs/Singer.vue";
+import SingingList from "@/views/Search/tabs/SingingList.vue";
+import Users from "@/views/Search/tabs/Users.vue";
+import MV from "@/views/Search/tabs/MV.vue";
+import RadioStation from "@/views/Search/tabs/RadioStation.vue";
+import Video from "@/views/Search/tabs/Video.vue";
 
-const currentPage: Ref<number> = ref(1)
-const loading: Ref<boolean> = ref(true)
-
-const searchContent1: any = ref(false);
-const params = ref(useRoute().query);
-// 监听当前页变化
-watch(currentPage, async () => {
-  loading.value = true
-
-  const searchResult1 = await search(params.value.keywords, 1, params.value?.limit, currentPage.value)
-  searchContent1.value = searchResult1.data.result
-
-  setTimeout(()=> loading.value = false, 500)
-}, {
-  immediate: true
-})
+const tabType = '1'
 </script>
 
 <template>
-  <el-row v-loading="loading">
-    <Song :list="searchContent1.songs" v-if="searchContent1"/>
-    <el-pagination layout="prev, pager, next" :page-size="30" :total="searchContent1 ? searchContent1.songCount : 0"
-                   v-model:current-page="currentPage"/>
-  </el-row>
+  <div>
+    <el-tabs v-model="tabType" class="el-tabs">
+      <el-tab-pane label="单曲" name="1">
+        <Single/>
+      </el-tab-pane>
+      <el-tab-pane label="专辑" name="10">
+        <Album/>
+      </el-tab-pane>
+      <el-tab-pane label="歌手" name="100">
+        <Singer/>
+      </el-tab-pane>
+      <el-tab-pane label="歌单" name="1000">
+        <SingingList/>
+      </el-tab-pane>
+      <el-tab-pane label="用户" name="1002">
+        <Users/>
+      </el-tab-pane>
+      <el-tab-pane label="MV" name="1004">
+        <MV/>
+      </el-tab-pane>
+      <el-tab-pane label="电台" name="1009">
+        <RadioStation/>
+      </el-tab-pane>
+      <el-tab-pane label="视频" name="1014">
+        <Video/>
+      </el-tab-pane>
+    </el-tabs>
+  </div>
 </template>
 
 <style scoped>

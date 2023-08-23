@@ -8,7 +8,7 @@
       <div class="info">
         <el-text size="large">{{ item.name }}</el-text>
         <br>
-<!--        歌曲标签-->
+        <!--        歌曲标签-->
         <el-tag type="danger" size="small" v-if="item.reason">
           {{ item.reason }}
         </el-tag>
@@ -18,7 +18,7 @@
           {{ item.fee === 4 ? '专辑' : '' }}
           {{ item.fee === 8 ? '试听' : '' }}
         </el-tag>
-<!--        作者名-->
+        <!--        作者名-->
         <el-text size="small" type="info" v-for="(i, index) in item.ar" :key="i.id" truncated>
           {{ index + 1 === item.ar.length ? i.name : i.name + ' / ' }}
         </el-text>
@@ -45,7 +45,8 @@
             {{ i.fee === 4 ? '专辑' : '' }}
             {{ i.fee === 8 ? '试听' : '' }}
           </el-tag>
-          <el-text size="small" type="info" v-for="(j, index) in i.ar" :key="j.id" truncated style="vertical-align: middle">
+          <el-text size="small" type="info" v-for="(j, index) in i.ar" :key="j.id" truncated
+                   style="vertical-align: middle">
             {{ index + 1 === i.ar.length ? j.name : j.name + '&nbsp;/&nbsp;' }}
           </el-text>
         </div>
@@ -53,16 +54,23 @@
     </el-carousel-item>
   </el-carousel>
 
-<!--  table 样式-->
-  <el-table :data="prop.list" v-if="prop.type === 'table'" @row-dblclick="addWaitingPlaylist(prop.list, $event)" empty-text="暂无数据">
-    <el-table-column type="index" label="#" width="50px" />
+  <!--  table 样式-->
+  <el-table :data="prop.list" v-if="prop.type === 'table'" @row-dblclick="addWaitingPlaylist(prop.list, $event)"
+            empty-text="正在加载...">
+    <el-table-column v-if="!prop.clearIndex" type="index" label="#" width="50px"/>
     <el-table-column label="标题" min-width="400px">
       <template #default="scope">
         <div class="musicTitle">
-          <el-image lazy :src="scope.row.al.picUrl + '?param=50y50'" />
+          <el-image lazy :src="scope.row.al.picUrl + '?param=50y50'"/>
           <div>
             <el-text size="large">{{ scope.row.name }}</el-text>
             <br>
+            <el-tag type="danger" size="small" v-if="scope.row.fee">
+              {{ scope.row.fee === 0 ? '免费' : '' }}
+              {{ scope.row.fee === 1 ? 'VIP' : '' }}
+              {{ scope.row.fee === 4 ? '专辑' : '' }}
+              {{ scope.row.fee === 8 ? '试听' : '' }}
+            </el-tag>
             <el-text size="small" type="info" v-for="(item, index) in scope.row.ar" :key="item.id">
               {{ index + 1 === scope.row.ar.length ? item.name : item.name + ' / ' }}
             </el-text>
@@ -70,7 +78,7 @@
         </div>
       </template>
     </el-table-column>
-    <el-table-column prop="al.name" label="专辑" width="400px" />
+    <el-table-column prop="al.name" label="专辑" width="400px"/>
     <el-table-column label="时长" width="100px">
       <template #default="scope">
         <el-text type="info">{{ formatMilliseconds(scope.row.dt) }}</el-text>
@@ -87,13 +95,16 @@ import {formatMilliseconds} from "@/utils/function.ts";
 /*
 list: 渲染列表
 type：渲染样式， 默认 | 轮播 | 表格
+clearIndex: 去除表格的序号
 */
-const prop: any = defineProps(['list', 'type'])
+const prop: any = defineProps(['list', 'type', 'clearIndex'])
 
 const list: Ref<any> = ref([])
-const carouselSize = 12;  // 轮播图的单页大小
-for (let i = 0; i < Math.ceil(prop.list.length / carouselSize); i++) {
-  list.value.push(prop.list.slice(i * carouselSize, (i + 1) * carouselSize));
+if (prop.type === 'carousel') {
+  const carouselSize = 12;  // 轮播图的单页大小
+  for (let i = 0; i < Math.ceil(prop.list.length / carouselSize); i++) {
+    list.value.push(prop.list.slice(i * carouselSize, (i + 1) * carouselSize));
+  }
 }
 </script>
 
@@ -157,7 +168,7 @@ for (let i = 0; i < Math.ceil(prop.list.length / carouselSize); i++) {
   opacity: 1;
 }
 
-.el-tag{
+.el-tag {
   margin-right: 5px;
 }
 
@@ -171,7 +182,7 @@ for (let i = 0; i < Math.ceil(prop.list.length / carouselSize); i++) {
   margin-right: .5rem;
 }
 
-.el-table__inner-wrapper{
+.el-table__inner-wrapper {
   background-color: var(--bg-color);
 }
 </style>

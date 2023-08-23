@@ -8,7 +8,7 @@ import request from "@/utils/request.ts"
  * @param limit 返回长度
  * @param offset 分页*/
 export function search(keywords: any, type?: any, limit?: any, offset?: any) {
-    const params = {keywords, type, limit, offset}
+    const params = {keywords, type, limit, offset, timestamp: new Date().getTime()}
     return request({
         url: '/cloudsearch',
         method: 'get',

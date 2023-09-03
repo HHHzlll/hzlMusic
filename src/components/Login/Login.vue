@@ -60,7 +60,9 @@ function handleLogin() {
                     if(res.data.code === 800){
                         clearInterval(timer)
                     }
-                    if (open.value === false) clearInterval(timer)
+                    if (!open.value){
+                      clearInterval(timer)
+                    }
                 })
             }, 1000)
         })
@@ -80,7 +82,6 @@ function handleLogout() {
         // location.reload()
     })
 }
-
 </script>
 
 <style scoped>

@@ -18,7 +18,7 @@ service.interceptors.request.use(
 // 响应拦截器
 service.interceptors.response.use(
     res => {
-        if (res.data.code > 400) return ElMessage({message: res.data.message, type: 'error'})
+        if (res.data.code > 400 && res.data.code < 500) return ElMessage({message: res.data.message, type: 'error'})
         return res
     },
     err => {

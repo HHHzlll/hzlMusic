@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/logo.webp" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="icon" type="image/svg+xml" href="/logo.webp"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<!--  在页面中加入（meta）头中添加upgrade-insecure-requests,这将会把http请求转化为https请求。这样就不会再出现Mixed Content的错误了。  -->
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>HzlMusic</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+</head>
+<body>
+<div id="app"></div>
+<script type="module" src="/src/main.ts"></script>
+</body>
 </html>

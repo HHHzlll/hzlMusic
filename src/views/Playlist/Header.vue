@@ -1,6 +1,6 @@
 <template>
     <el-card class="header" :body-style="{ display: 'grid', gridTemplateColumns: '300px 1fr' }">
-        <el-image class="headerImg" :src="playlist.coverImgUrl + '?param=300y300'" />
+        <el-image class="headerImg" :src="playlist.coverImgUrl + '?param=300y300'" lazy />
         <div class="playlistInfo">
             <h2 style="white-space: nowrap;">{{ playlist.name }}</h2>
             <el-text style="display: block;max-height: 4rem;overflow:hidden;">{{ playlist.description }}</el-text>
@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 import { usePlaylistStore } from '@/store/playlist';
-import { getUserDetail } from "@/api/user/index";
+import { getUserDetail } from "@/api/user";
 import { formatTimestamp } from "@/utils/function";
 // 解构赋值 歌单信息
 const { playlist }: any = usePlaylistStore().playlistDetail

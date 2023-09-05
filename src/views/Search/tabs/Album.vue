@@ -1,12 +1,11 @@
 <script setup lang="ts">
 
 const prop = defineProps(['searchContent']);
-console.log(prop.searchContent)
 </script>
 
 <template>
 <div>
-  <SongList :list="item.albums" v-for="item in prop.searchContent"/>
+  <SongList :list="item" v-for="item in prop.searchContent.list"/>
 </div>
 </template>
 

@@ -12,7 +12,7 @@
             <h2>请使用网易云音乐App 扫码登录</h2>
             <p>{{ loginStatus }}</p>
             <el-divider />
-            <el-image class="qrimg" v-if="qrimg !== ''" :src="qrimg" />
+            <el-image class="qrimg" v-if="qrimg !== ''" :src="qrimg" lazy />
         </el-drawer>
     </div>
 </template>

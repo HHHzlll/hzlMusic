@@ -6,7 +6,7 @@
             <el-table-column min-width="400px">
                 <template #default="scope">
                     <div class="musicTitle">
-                        <el-image :src="scope.row.al.picUrl + '?param=50y50'" />
+                        <el-image :src="scope.row.al.picUrl + '?param=50y50'" lazy />
                         <div>
                             <el-text size="large" :class="{ activeTitle: scope.$index === musicStore.index }">{{
                                 scope.row.name }}</el-text>

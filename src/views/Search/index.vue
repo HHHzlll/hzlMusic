@@ -8,72 +8,74 @@ import MV from "@/views/Search/tabs/MV.vue";
 import RadioStation from "@/views/Search/tabs/RadioStation.vue";
 import Video from "@/views/Search/tabs/Video.vue";
 import {useRoute} from "vue-router";
-import {watch, ref} from "vue";
 import {search} from "@/api/search.ts";
 
-const tabType = ref(1)
+const tabType = ref("1") // tab栏类型
 
 const params = ref(useRoute().query); // 搜索参数
-const searchContent: any = ref([]);  // 搜索内容
-const offset = ref(-1)
 
-// 监听tabs变化
-watch([tabType, offset], async () => {
-  const {data: {result: searchResult}} = await search(params.value.keywords, tabType.value, params.value?.limit || 30, offset.value * 30)
-  searchContent.value.push(searchResult)
-})
+// 搜索内容，key对应接口的type
+const searchContent: any = ref({
+// 使用 markRaw 将对象标记为非响应式
+  [1]: {label: '单曲', count: 0, list: [], offset: 0, component: markRaw(Single), isEnd: false},
+  [10]: {label: '专辑', count: 0, list: [], offset: 0, component: markRaw(Album), isEnd: false},
+  [100]: {label: '歌手', count: 0, list: [], offset: 0, component: markRaw(Singer), isEnd: false},
+  [1000]: {label: '歌单', count: 0, list: [], offset: 0, component: markRaw(SingingList), isEnd: false},
+  [1002]: {label: '用户', count: 0, list: [], offset: 0, component: markRaw(Users), isEnd: false},
+  [1004]: {label: 'MV', count: 0, list: [], offset: 0, component: markRaw(MV), isEnd: false},
+  [1009]: {label: '电台', count: 0, list: [], offset: 0, component: markRaw(RadioStation), isEnd: false},
+  [1014]: {label: '视频', count: 0, list: [], offset: 0, component: markRaw(Video), isEnd: false},
+});
 
+// 更新数据的函数
+async function updateData() {
+  const {data: {result: searchResult}} = await search(params.value.keywords, tabType.value, params.value?.limit || 30, searchContent.value[tabType.value].offset * 30)
+  for (const key in searchResult) {
+    const item = searchResult[key]
+    if (Object.prototype.toString.call(item).slice(8, -1) === 'Array') searchContent.value[tabType.value].list.push(item)
+    if (Object.prototype.toString.call(item).slice(8, -1) === 'Number') {
+      // 搜索结束接口会返回count0,
+      if (item === 0) {
+        return searchContent.value[tabType.value].isEnd = true;
+      }
+      searchContent.value[tabType.value].count = item
+    }
+  }
+  searchContent.value[tabType.value].offset++
+}
+
+// 监听用户是否滑动结束
 const loading = ref(); // loading元素
 onMounted(() => {
   const observer = new IntersectionObserver(
       entries => {
-        entries;
-        offset.value++
+        if (entries[0].isIntersecting) {
+          console.log(entries[0].isIntersecting)
+          updateData()
+        }
       }
   )
   observer.observe(loading.value)
 })
 
-function tabChange() {
-  offset.value = 0;
-  searchContent.value = [];
-}
 </script>
 
 <template>
   <el-scrollbar height="calc(100vh - 140px)">
-    <el-tabs v-model="tabType" class="el-tabs" @tabChange="tabChange">
-      <el-tab-pane lazy label="单曲" :name="1">
-        <Single :search-content="searchContent"/>
-      </el-tab-pane>
-      <el-tab-pane lazy label="专辑" :name="10">
-        <Album :search-content="searchContent"/>
-      </el-tab-pane>
-      <el-tab-pane lazy label="歌手" :name="100">
-        <Singer/>
-      </el-tab-pane>
-      <el-tab-pane lazy label="歌单" :name="1000">
-        <SingingList/>
-      </el-tab-pane>
-      <el-tab-pane lazy label="用户" :name="1002">
-        <Users/>
-      </el-tab-pane>
-      <el-tab-pane lazy label="MV" :name="1004">
-        <MV/>
-      </el-tab-pane>
-      <el-tab-pane lazy label="电台" :name="1009">
-        <RadioStation/>
-      </el-tab-pane>
-      <el-tab-pane lazy label="视频" :name="1014">
-        <Video/>
+    <el-tabs v-model="tabType" class="el-tabs">
+      <el-tab-pane v-for="(item, index) in searchContent" :key="item.component" :name="index" :label="item.label" lazy>
+        <component :is="item.component" :search-content="item"/>
       </el-tab-pane>
     </el-tabs>
 
-    <div ref="loading">
+    <div ref="loading" v-show="!searchContent[tabType].isEnd">
       <el-icon class="is-loading">
         <Loading/>
       </el-icon>
     </div>
+    <el-divider v-show="searchContent[tabType].isEnd">
+      <el-text size="small" type="info">搜索结束，共{{searchContent[tabType].count}}条结果</el-text>
+    </el-divider>
   </el-scrollbar>
 </template>
 

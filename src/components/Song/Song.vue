@@ -3,7 +3,7 @@
   <div class="container" v-if="!prop.type">
     <el-card v-for="item in prop.list" :key="item.id"
              @dblclick="addWaitingPlaylist(prop.list, item)">
-      <el-image class="img" :src="item.al.picUrl + '?param=60y60'"/>
+      <el-image class="img" :src="item.al.picUrl + '?param=60y60'" lazy/>
       <svg-icon icon-class="playMusic"/>
       <div class="info">
         <el-text size="large">{{ item.name }}</el-text>
@@ -31,7 +31,7 @@
                v-if="prop.type === 'carousel'">
     <el-carousel-item v-for="(item, index) in list" :key="index">
       <el-card v-for="i in item" @dblclick="addWaitingPlaylist(prop.list, i)">
-        <el-image class="img" :src="i.al.picUrl + '?param=60y60'"/>
+        <el-image class="img" :src="i.al.picUrl + '?param=60y60'" lazy/>
         <svg-icon icon-class="playMusic"/>
         <div class="info">
           <el-text size="large">{{ i.name }}</el-text>

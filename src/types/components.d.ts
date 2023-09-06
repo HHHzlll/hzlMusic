@@ -46,6 +46,7 @@ declare module 'vue' {
     PlayProgress: typeof import('./../components/Progress/playProgress.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    ScrollLoading: typeof import('./../components/ScrollLoading/index.vue')['default']
     Search: typeof import('./../components/Search/index.vue')['default']
     Song: typeof import('./../components/Song/Song.vue')['default']
     SongList: typeof import('./../components/SongList/SongList.vue')['default']

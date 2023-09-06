@@ -49,18 +49,18 @@ async function updateData() {
   disabledTabs.value = false; // 加载完成后再启用tab栏
 }
 
-// 监听用户是否滑动结束
-const loading = ref(); // loading元素
-onMounted(() => {
-  const observer = new IntersectionObserver(
-      entries => {
-        if (entries[0].isIntersecting) {
-          updateData()
-        }
-      }
-  )
-  observer.observe(loading.value)
-})
+// // 监听用户是否滑动结束
+// const loading = ref(); // loading元素
+// onMounted(() => {
+//   const observer = new IntersectionObserver(
+//       entries => {
+//         if (entries[0].isIntersecting) {
+//           updateData()
+//         }
+//       }
+//   )
+//   observer.observe(loading.value)
+// })
 </script>
 
 <template>
@@ -71,16 +71,17 @@ onMounted(() => {
       </el-tab-pane>
     </el-tabs>
 
-<!--    加载的动画 -->
-    <div ref="loading" v-show="!searchContent[tabType].isEnd">
-      <el-icon class="is-loading">
-        <Loading/>
-      </el-icon>
-    </div>
-<!--    加载完成 -->
-    <el-divider v-show="searchContent[tabType].isEnd">
-      <el-text size="small" type="info">搜索结束，共{{searchContent[tabType].count}}条结果</el-text>
-    </el-divider>
+<!--&lt;!&ndash;    加载的动画 &ndash;&gt;-->
+<!--    <div ref="loading" v-show="!searchContent[tabType].isEnd">-->
+<!--      <el-icon class="is-loading">-->
+<!--        <Loading/>-->
+<!--      </el-icon>-->
+<!--    </div>-->
+<!--&lt;!&ndash;    加载完成 &ndash;&gt;-->
+<!--    <el-divider v-show="searchContent[tabType].isEnd">-->
+<!--      <el-text size="small" type="info">搜索结束，共{{searchContent[tabType].count}}条结果</el-text>-->
+<!--    </el-divider>-->
+    <ScrollLoading @loading="updateData()" :is-show="!searchContent[tabType].isEnd" :count="searchContent[tabType].count"/>
   </el-scrollbar>
 </template>
 

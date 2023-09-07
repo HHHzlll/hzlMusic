@@ -1,11 +1,11 @@
 <script setup lang="ts">
-const prop = defineProps(['list'])
+const prop:any = defineProps(['list'])
 </script>
 
 <template>
   <el-card class="el-card" shadow="hover" v-for="i in prop.list" :key="i.component">
-    <el-avatar :src="i.picUrl + '?param=100y100'" :size="150" />
-    <el-text size="large" truncated>{{ i.name }}</el-text>
+    <el-avatar :src="i.avatarUrl + '?param=100y100'" :size="150" />
+    <el-text size="large" truncated>{{ i.nickname }}</el-text>
   </el-card>
 </template>
 

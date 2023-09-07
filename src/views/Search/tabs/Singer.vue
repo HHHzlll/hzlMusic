@@ -4,10 +4,7 @@ const prop = defineProps(['searchContent'])
 </script>
 
 <template>
-  <span v-for="item in prop.searchContent.list" :key="item.component">
-    <SingerCard :list="item"/>
-  </span>
-
+    <SingerCard v-for="item in prop.searchContent.list" :key="item.component" :list="item"/>
 </template>
 
 <style scoped>

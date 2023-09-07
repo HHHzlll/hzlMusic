@@ -47,6 +47,7 @@ declare module 'vue' {
     Song: typeof import('./../components/Song/Song.vue')['default']
     SongList: typeof import('./../components/SongList/SongList.vue')['default']
     SvgIcon: typeof import('./../components/SvgIcon/index.vue')['default']
+    UserCard: typeof import('./../components/UserCard/index.vue')['default']
     UserInfo: typeof import('./../components/User/UserInfo.vue')['default']
     Volume: typeof import('./../components/Volume/volume.vue')['default']
     WaitingList: typeof import('./../components/WaitingList/waitingList.vue')['default']

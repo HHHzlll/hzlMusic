@@ -19,7 +19,6 @@ async function updateData() {
   item.title = styleList[list.value.length]
   item.data = playlist.data.data.playlist
   list.value.push(item)
-  console.log(list.value.length, styleList.length)
 }
 </script>
 

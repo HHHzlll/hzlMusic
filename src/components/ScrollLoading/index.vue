@@ -11,9 +11,17 @@ const loading = ref(); // loading元素
 onMounted(() => {
   const observer = new IntersectionObserver(
       entries => {
+        // 视口底部与最底部元素之差
+        const distanceToBottom = entries[0].rootBounds.height - entries[0].intersectionRect.bottom;
         if (entries[0].isIntersecting) {
           emit('loading')
         }
+        let timer = setTimeout(() => {
+          if (distanceToBottom > 200) {
+            emit('loading')
+            clearTimeout(timer)
+          }
+        }, 1000)
       }
   )
   observer.observe(loading.value)

@@ -42,7 +42,7 @@ async function updateData() {
         continue;
       }
       searchContent.value[tabType.value].count = item;
-      if ( item <= 30) searchContent.value[tabType.value].isEnd = true;
+      if (item <= 30) searchContent.value[tabType.value].isEnd = true;
     }
   }
   searchContent.value[tabType.value].offset++
@@ -53,12 +53,14 @@ async function updateData() {
 <template>
   <el-scrollbar height="calc(100vh - 140px)">
     <el-tabs v-model="tabType" class="el-tabs">
-      <el-tab-pane v-for="(item, index) in searchContent" :key="item.component" :name="index" :label="item.label" lazy :disabled="disabledTabs">
+      <el-tab-pane v-for="(item, index) in searchContent" :key="item.component" :name="index" :label="item.label" lazy
+                   :disabled="disabledTabs">
         <component :is="item.component" :search-content="item"/>
       </el-tab-pane>
     </el-tabs>
 
-    <ScrollLoading @loading="updateData()" :is-show="!searchContent[tabType].isEnd" :count="searchContent[tabType].count"/>
+    <ScrollLoading @loading="updateData()" :is-show="!searchContent[tabType].isEnd"
+                   :count="searchContent[tabType].count"/>
   </el-scrollbar>
 </template>
 
@@ -67,7 +69,7 @@ async function updateData() {
   display: none;
 }
 
-:deep(.el-tabs__active-bar){
+:deep(.el-tabs__active-bar) {
   background-color: var(--primary-color);
 }
 

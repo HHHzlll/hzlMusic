@@ -11,8 +11,13 @@ const loading = ref(); // loading元素
 onMounted(() => {
   const observer = new IntersectionObserver(
       entries => {
-        if (entries[0].isIntersecting) {
-          emit('loading')
+        // 如果进入视图
+        if(entries[0].isIntersecting) {
+          emit('loading'); // 触发父组件的加载函数
+          observer.disconnect();  // 取消监听，1秒后再次监听是否在视图内
+          setTimeout(() => {
+            observer.observe(loading.value)
+          }, 1000)
         }
       }
   )

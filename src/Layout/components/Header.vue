@@ -9,7 +9,6 @@ let searchContent: Ref<UnwrapRef<string>> = ref('')
  * 触发搜索功能 */
 async function handleSearch(keywords: string, type?: number, limit?: number) {
   if (keywords.length === 0) return
-  await router.push({name: 'Home'})
   await router.push({
     name: 'search', query: {
       keywords, type, limit

@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <h2>您的每日推荐</h2>
-        <el-skeleton :loading="loading" animated :count="9">
+        <el-skeleton :loading="loading" animated :count="12">
             <template #template>
                 <el-card>
                     <el-skeleton-item variant="image" class="img" style="width: 60px;height: 60px;" />
@@ -38,9 +38,8 @@ getDailyRecommendations().then(res => {
 }
 
 .el-card {
-    width: 30%;
+    width: 25%;
     height: calc(60px + 2rem);
-    margin: 0 1rem 1rem 0;
     box-shadow: none;
     border: none;
     background: var(--bg-color);

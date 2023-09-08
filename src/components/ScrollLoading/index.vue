@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted} from 'vue'
+import {ref, onMounted} from 'vue'
 
 // 需要的参数，是否显示加载、数据数量
 const prop = defineProps(['isShow', 'count'])
@@ -12,12 +12,16 @@ onMounted(() => {
   const observer = new IntersectionObserver(
       entries => {
         // 如果进入视图
-        if(entries[0].isIntersecting) {
+        if (entries[0].isIntersecting) {
           emit('loading'); // 触发父组件的加载函数
           observer.disconnect();  // 取消监听，1秒后再次监听是否在视图内
           setTimeout(() => {
-            observer.observe(loading.value)
-          }, 1000)
+            try {
+              observer.observe(loading.value)
+            } catch (err) {
+            //   隐藏控制台找不到DOM报错
+            }
+          }, 3000)
         }
       }
   )

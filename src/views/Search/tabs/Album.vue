@@ -5,7 +5,7 @@ const prop = defineProps(['searchContent']);
 
 <template>
 <div>
-  <SongList :list="item" v-for="item in prop.searchContent.list"/>
+  <AlbumCard :list="item" v-for="item in prop.searchContent.list"/>
 </div>
 </template>
 

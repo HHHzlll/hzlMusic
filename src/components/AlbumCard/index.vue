@@ -1,6 +1,6 @@
 <template>
   <el-card :body-style="{ padding: '0px' }" shadow="hover" v-for="item in prop.list" :key="item.id" v-once
-           @click="getPlaylistDetail(item.id)">
+           @click="ElMessage({message: '暂未完成专辑功能...'})">
     <svg-icon icon-class="playMusic"/>
     <el-image class="listImg" :src="(item.picUrl || item.cover || item.coverImgUrl) + '?param=200y200'" lazy/>
     <el-image :src="(item.picUrl || item.cover || item.coverImgUrl) + '?param=200y60'" style="filter: blur(30px)" lazy/>
@@ -9,8 +9,7 @@
 </template>
 
 <script setup lang="ts">
-// 公用获取歌单详情的函数
-import {getPlaylistDetail} from "@/utils/playlist";
+import { ElMessage } from 'element-plus'
 
 const prop = defineProps(['list'])
 

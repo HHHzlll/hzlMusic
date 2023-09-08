@@ -9,11 +9,8 @@ import Header from '@/Layout/components/Header.vue'
 import {usePlaylistStore} from "@/store/playlist";
 
 const router = useRouter()
-watch(() => usePlaylistStore().playlistDetail, () => {
-  router.push({name: 'Home'})
-  setTimeout(() => {  // 放到延迟队列最后执行
-    router.push({name: 'playlist'})
-  });
+watch(() => usePlaylistStore().playlistDetail, async () => {
+    await router.push({name: 'playlist'})
 })
 </script>
 

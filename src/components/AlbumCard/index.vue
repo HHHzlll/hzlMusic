@@ -1,6 +1,6 @@
 <template>
   <el-card :body-style="{ padding: '0px' }" shadow="hover" v-for="item in prop.list" :key="item.id" v-once
-           @click="ElMessage({message: '暂未完成专辑功能...'})">
+           @click="test">
     <svg-icon icon-class="playMusic"/>
     <el-image class="listImg" :src="(item.picUrl || item.cover || item.coverImgUrl) + '?param=200y200'" lazy/>
     <el-image :src="(item.picUrl || item.cover || item.coverImgUrl) + '?param=200y60'" style="filter: blur(30px)" lazy/>
@@ -9,10 +9,12 @@
 </template>
 
 <script setup lang="ts">
-import { ElMessage } from 'element-plus'
 
 const prop = defineProps(['list'])
 
+function test() {
+  return ElMessage({message: '暂未完成专辑功能...', type: 'error'})
+}
 </script>
 
 <style scoped>

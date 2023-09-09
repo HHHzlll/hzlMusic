@@ -60,6 +60,7 @@
     "watchPostEffect": true,
     "watchSyncEffect": true,
     "ElMessage": true,
-    "ElNotification": true
+    "ElNotification": true,
+    "WritableComputedRef": true
   }
 }
